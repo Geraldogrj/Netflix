@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import javafx.scene.image.ImageView;
+import javax.persistence.Column;
+import javax.persistence.Id;
 
 /**
  *
@@ -17,8 +19,9 @@ import javafx.scene.image.ImageView;
 public class Media implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+    @Id
     private int id;
+    @Column
     private String nome;
     private String descricao;
     private int ano;

@@ -23,15 +23,25 @@ public class Media implements Serializable {
     private int id;
     @Column
     private String nome;
+    @Column
     private String descricao;
+    @Column
     private int ano;
+    @Column
     private int temporada;
+    @Column
     private int episodio;
+    @Column
     private Calendar duracao;
+    @Column
     private String categoria;
+    @Column
     private String diretor;
+    @Column
     private String protagonista;
+    @Column
     private int idade;
+    @Column
     private ImageView imagem;
     
     public Media(){

@@ -2,21 +2,27 @@ package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
  *
- * @author geral_001
+ * @author Geraldo e Roberto
  */
-public class LoginAppController implements Initializable {
+public class LoginAppController {
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+    @FXML
+    private TextField txtLogin;
+    @FXML
+    private TextField txtSenha;
+    @FXML
+    private Button btnLogar;
+   
+    public void logar(){
+        
+    }
     
 }

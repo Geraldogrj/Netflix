@@ -21,6 +21,7 @@ public class LoginAppController {
     @FXML
     private Button btnLogar;
    
+    @FXML
     public void logar(){
         
     }

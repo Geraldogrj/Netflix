@@ -14,12 +14,12 @@
    <children>
       <VBox layoutX="93.0" layoutY="10.0" spacing="20.0">
          <children>
-            <ImageView fitHeight="101.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgNetflix" fitHeight="101.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
                <VBox.margin>
                   <Insets left="35.0" />
                </VBox.margin>
                <image>
-                  <Image url="@../../../../../n1.png" />
+                  <Image url="@../images/n1.png" />
                </image>
             </ImageView>
             <TextField fx:id="txtLogin" prefHeight="25.0" prefWidth="215.0" promptText="Login">
@@ -33,6 +33,6 @@
             </PasswordField>
          </children>
       </VBox>
-      <Button fx:id="btnLogar" layoutX="261.0" layoutY="225.0" mnemonicParsing="false" text="Logar" />
+      <Button fx:id="btnLogar" layoutX="261.0" layoutY="225.0" mnemonicParsing="false" onAction="#logar" text="Logar" />
    </children>
 </AnchorPane>

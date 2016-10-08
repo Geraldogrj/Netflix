@@ -18,7 +18,8 @@ import javax.persistence.Id;
 @Table(name = "Media")
 public class Media implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
+    
     @Id
     private int id;
     @Column

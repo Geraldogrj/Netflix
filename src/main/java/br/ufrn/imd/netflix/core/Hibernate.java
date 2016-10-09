@@ -1,17 +1,15 @@
-package dao;
+package br.ufrn.imd.netflix.core;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class HibernateUtil {
+public class Hibernate {
 
 	private static final SessionFactory sessionFactory = buildSessionFactory();
 
 	private static SessionFactory buildSessionFactory() {
 		try {
-			// load from different directory
-			SessionFactory sessionFactory = new Configuration().configure(
-					"/netflix/src/main/resources/hibernate.cfg.xml")
+			SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml")
 					.buildSessionFactory();
 			return sessionFactory;
 

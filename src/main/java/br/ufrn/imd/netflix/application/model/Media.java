@@ -1,14 +1,14 @@
-package model;
+package br.ufrn.imd.netflix.application.model;
 
-import java.io.Serializable;
 import java.util.Calendar;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import br.ufrn.imd.netflix.core.Model;
 import javafx.scene.image.ImageView;
-import javax.persistence.Column;
-import javax.persistence.Id;
 
 /**
  *
@@ -16,12 +16,10 @@ import javax.persistence.Id;
  */
 @Entity
 @Table(name = "Media")
-public class Media implements Serializable {
+public class Media extends Model {
 
     private static final long serialVersionUID = 1L;
     
-    @Id
-    private int id;
     @Column
     private String nome;
     @Column
@@ -42,7 +40,7 @@ public class Media implements Serializable {
     private String protagonista;
     @Column
     private int idade;
-    @Column
+    @Transient
     private ImageView imagem;
     
     public Media(){
@@ -62,14 +60,6 @@ public class Media implements Serializable {
         this.protagonista = protagonista;
         this.idade = idade;
         this.imagem = imagem;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNome() {

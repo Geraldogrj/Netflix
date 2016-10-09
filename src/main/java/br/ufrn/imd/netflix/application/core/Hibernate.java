@@ -1,4 +1,4 @@
-package br.ufrn.imd.netflix.core;
+package br.ufrn.imd.netflix.application.core;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

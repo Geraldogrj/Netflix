@@ -4,9 +4,9 @@ import java.io.IOException;
 
 import javax.persistence.NoResultException;
 
+import br.ufrn.imd.netflix.application.core.Controller;
+import br.ufrn.imd.netflix.application.core.Dao;
 import br.ufrn.imd.netflix.application.model.Usuario;
-import br.ufrn.imd.netflix.core.Controller;
-import br.ufrn.imd.netflix.core.Dao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

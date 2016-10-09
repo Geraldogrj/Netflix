@@ -7,11 +7,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class NetflixApp extends Application {
+	
+	private static final String FXML_LOGIN = "/fxml/loginView.fxml";
 
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/loginView.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource(FXML_LOGIN));
             Scene scene = new Scene(root,400,300);
             
             primaryStage.setResizable(false);

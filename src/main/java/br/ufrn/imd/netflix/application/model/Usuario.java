@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import br.ufrn.imd.netflix.core.Model;
+import br.ufrn.imd.netflix.application.core.Model;
 
 @Entity
 @Table(name="usuario")

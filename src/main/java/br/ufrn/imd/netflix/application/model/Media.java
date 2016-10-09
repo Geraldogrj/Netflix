@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import br.ufrn.imd.netflix.core.Model;
+import br.ufrn.imd.netflix.application.core.Model;
 import javafx.scene.image.ImageView;
 
 /**

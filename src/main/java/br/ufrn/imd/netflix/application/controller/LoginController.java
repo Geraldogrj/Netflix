@@ -40,9 +40,13 @@ public class LoginController extends Controller {
     	try{
     		Usuario usuario = dao.queryForOne("select u from Usuario u where u.login = ?0 and u.senha = ?1 ", 
                         txtLogin.getText(), txtSenha.getText());
-                    		    		
-    		Intent adminIntent = new Intent().fxml(AdminController.FXML_ADMIN).putExtra("usuario", usuario);
-            abrirJanela(adminIntent);    
+            
+    		Intent intent = new Intent();
+    		intent.fxml(AdminController.FXML_ADMIN);
+    		intent.putExtra("usuario", usuario);
+//    		Intent adminIntent = new Intent().fxml(AdminController.FXML_ADMIN).putExtra("usuario", usuario);
+    		
+            abrirJanela(intent);    
     		fecharJanela(event);
     	}
     	catch (NoResultException e){

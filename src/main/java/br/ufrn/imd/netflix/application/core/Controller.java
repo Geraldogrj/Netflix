@@ -1,6 +1,5 @@
 package br.ufrn.imd.netflix.application.core;
 
-import br.ufrn.imd.netflix.application.controller.LoginController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,22 +14,44 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
+/**
+ * Classe responsável por definir os métodos comuns de Controllers.
+ * @author Roberto Dantas
+ *
+ */
 public abstract class Controller implements Initializable {
-	
+		
+	/**
+	 * Retorna o DAO genérico referente a classe que extends Model.
+	 * @param clazz
+	 * @return
+	 */
 	protected <T extends Model> Dao<T> getDAO(Class<T> clazz){
 		return new Dao<T>(clazz);
 	}
-		
-	protected void abrirJanela(String fxml, Controller controller) throws IOException{
-                FXMLLoader loader = new FXMLLoader();
-	        Parent root = loader.load(getClass().getResource(fxml));
-                loader.setController(controller);
-	        Scene scene = new Scene(root);
-	        Stage stage = new Stage();
-	        stage.setScene(scene);
-	        stage.show();
+			
+	/**
+	 * Carrega um FXML com parametros.
+	 * Observação: O FXML deve possuir um fx:controller definido.
+	 * @param fxml
+	 * @param params
+	 * @throws IOException
+	 */
+	protected void abrirJanela(Intent intent) throws IOException{
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(intent.getFXML()));
+        Parent root = loader.load();
+        Controller controller = loader.getController();
+        controller.onCreate(intent.getExtras());
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
 	}
 	
+	/**
+	 * Fecha a janela que chamou a ação.
+	 * @param event
+	 */
 	protected void fecharJanela(ActionEvent event){
 		 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		 stage.close();
@@ -57,11 +78,12 @@ public abstract class Controller implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub	
+		
 	}
 	
-	
-	
-	
+	public void onCreate(Bundle bundle){
+		
+	}
+		
 
 }

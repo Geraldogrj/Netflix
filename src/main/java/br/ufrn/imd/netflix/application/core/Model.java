@@ -5,6 +5,11 @@ import java.io.Serializable;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+/**
+ * ResponsÃ¡vel por definir que as entidades a serem persistidas possuem ID
+ * @author Roberto Dantas
+ *
+ */
 @MappedSuperclass
 public abstract class Model implements Serializable {
 	
@@ -25,7 +30,7 @@ public abstract class Model implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-                //Operador ternário
+                //Operador ternï¿½rio
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}

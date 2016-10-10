@@ -7,6 +7,12 @@ import javax.persistence.NoResultException;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
+/**
+ * Classe Genérica para realizar ações com banco de dados.
+ * @author robertodantas
+ *
+ * @param <T>
+ */
 public class Dao<T extends Model> {
 	
 	private final Class<T> entityClass;

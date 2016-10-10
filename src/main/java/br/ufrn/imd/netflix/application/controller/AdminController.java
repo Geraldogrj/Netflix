@@ -5,37 +5,28 @@
  */
 package br.ufrn.imd.netflix.application.controller;
 
+import br.ufrn.imd.netflix.application.core.Bundle;
 import br.ufrn.imd.netflix.application.core.Controller;
 import br.ufrn.imd.netflix.application.model.Usuario;
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 /**
  *
- * @author geral_001
+ * @author Geraldo
  */
 public class AdminController extends Controller {
     
-    @FXML
+    public static final String FXML_ADMIN = "/fxml/admin_view.fxml";
+    	
+	@FXML 
     private Label lblUsuarioLogado;
-    
-    private Usuario usuarioLogado;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        lblUsuarioLogado.setText(usuarioLogado.getLogin());
+    public void onCreate(Bundle bundle) {
+    	Usuario usuario = (Usuario) bundle.get("usuario");
+    	lblUsuarioLogado.setText(usuario.getLogin());
     }
-    
-    public Usuario getUsuarioLogado() {
-        return usuarioLogado;
-    }
-
-    public void setUsuarioLogado(Usuario usuarioLogado) {
-        this.usuarioLogado = usuarioLogado;
-    }
-    
-    
-    
+        
+   
 }

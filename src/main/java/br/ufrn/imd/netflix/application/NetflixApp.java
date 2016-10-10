@@ -1,5 +1,6 @@
 package br.ufrn.imd.netflix.application;
 
+import br.ufrn.imd.netflix.application.controller.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,12 +9,10 @@ import javafx.stage.Stage;
 
 public class NetflixApp extends Application {
 	
-    private static final String FXML_LOGIN = "/fxml/loginView.fxml";
-
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource(FXML_LOGIN));
+            Parent root = FXMLLoader.load(getClass().getResource(LoginController.FXML_LOGIN));
             Scene scene = new Scene(root,400,300);
             
             primaryStage.setResizable(false);

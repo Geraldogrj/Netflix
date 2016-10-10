@@ -3,6 +3,11 @@ package br.ufrn.imd.netflix.application.core;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+/**
+ * Classe responsável por carregar as configurações do banco de dados Hibernate
+ * @author Geraldo e Roberto
+ *
+ */
 public class Hibernate {
 
 	private static final SessionFactory sessionFactory = buildSessionFactory();

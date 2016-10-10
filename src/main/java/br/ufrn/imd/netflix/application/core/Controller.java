@@ -1,5 +1,6 @@
 package br.ufrn.imd.netflix.application.core;
 
+import br.ufrn.imd.netflix.application.controller.LoginController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,11 +21,12 @@ public abstract class Controller implements Initializable {
 		return new Dao<T>(clazz);
 	}
 		
-	protected void abrirJanela(String fxml) throws IOException{
-	        Parent root = FXMLLoader.load(getClass().getResource(fxml));
+	protected void abrirJanela(String fxml, Controller controller) throws IOException{
+                FXMLLoader loader = new FXMLLoader();
+	        Parent root = loader.load(getClass().getResource(fxml));
+                loader.setController(controller);
 	        Scene scene = new Scene(root);
 	        Stage stage = new Stage();
-	        stage.setTitle("Media Overview");
 	        stage.setScene(scene);
 	        stage.show();
 	}

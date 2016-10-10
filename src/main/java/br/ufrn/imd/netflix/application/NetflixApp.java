@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 public class NetflixApp extends Application {
 	
-	private static final String FXML_LOGIN = "/fxml/loginView.fxml";
+    private static final String FXML_LOGIN = "/fxml/loginView.fxml";
 
     @Override
     public void start(Stage primaryStage) {

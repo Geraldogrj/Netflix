@@ -13,7 +13,7 @@ import javafx.scene.control.Label;
 
 /**
  *
- * @author Geraldo
+ * @author Geraldo e Roberto
  */
 public class AdminController extends Controller {
     
@@ -25,7 +25,7 @@ public class AdminController extends Controller {
 	@Override
 	public void onCreate(Bundle bundle) {
 		Usuario usuario = (Usuario) bundle.get("usuario");
-		lblUsuarioLogado.setText(usuario.getLogin());
+		lblUsuarioLogado.setText(usuario.getNome());
 	}
         
    

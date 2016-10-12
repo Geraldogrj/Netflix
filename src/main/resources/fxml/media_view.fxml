@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.netflix.application.controller.MediaController">
    <children>
-      <Label layoutX="14.0" layoutY="14.0" text="Usuário logado" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="15.0" />
+      <Label fx:id="lblUsuarioLogado" layoutX="112.0" layoutY="14.0" text="Usuário logado" AnchorPane.leftAnchor="112.0" AnchorPane.topAnchor="14.0" />
       <HBox layoutX="374.0" layoutY="15.0" spacing="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
             <TextField />
@@ -33,5 +33,6 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
+      <Label layoutX="14.0" layoutY="14.0" text="Usuário Logado:" />
    </children>
 </AnchorPane>

@@ -41,6 +41,7 @@ public class LoginController extends Controller {
     		Usuario usuario = dao.queryForOne("select u from Usuario u where u.login = ?0 and u.senha = ?1 ", 
                         txtLogin.getText(), txtSenha.getText());
             
+            if (usuario.getLogin().equals("admin")){    
     		Intent intent = new Intent();
     		intent.fxml(AdminController.FXML_ADMIN);
     		intent.putExtra("usuario", usuario);
@@ -48,12 +49,20 @@ public class LoginController extends Controller {
     		
             abrirJanela(intent);    
     		fecharJanela(event);
+        } else {
+                Intent intent = new Intent();
+    		intent.fxml(MediaController.FXML_MEDIA);
+    		intent.putExtra("usuario", usuario);
+    		
+            abrirJanela(intent);    
+    		fecharJanela(event);
+            }
     	}
     	catch (NoResultException e){
-    		abrirAlertaInfo("Nï¿½o foi possï¿½vel logar", "Usuï¿½rio ou Senha nï¿½o encontrados...");
+    		abrirAlertaInfo("Não foi possível logar", "Usuário ou Senha não encontrados...");
     	} 
     	catch (IOException e) {
-			abrirAlertaErro("Erro Inesperado!", "Nï¿½o foi possï¿½vel abrir a janela de Mï¿½dia...");
+			abrirAlertaErro("Erro Inesperado!", "Não foi possível abrir a janela de Mídia...");
 			e.printStackTrace();
 		}
     	

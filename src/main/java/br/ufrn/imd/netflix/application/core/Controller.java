@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import br.ufrn.imd.netflix.application.NetflixApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -50,23 +49,10 @@ public abstract class Controller implements Initializable {
         return controller;
 	}
 	
-	protected void replaceView(Intent intent) throws IOException{
-		NetflixApp.replaceView(intent);
+	protected ApplicationRuntime getRuntime(){
+		return ApplicationRuntime.getInstance();
 	}
-	
-	protected void replaceViewAndShow(Intent intent) throws IOException{
-		NetflixApp.replaceViewAndShow(intent);
-	}
-	
-	/**
-	 * Fecha a janela que chamou a ação.
-	 * @param event
-	 */
-	protected void closeWindow(ActionEvent event){
-		 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		 stage.close();
-	}
-	
+			
 	protected void abrirAlertaInfo(String title, String contentText){
 		abrirAlerta(AlertType.INFORMATION, title, contentText);
 	}

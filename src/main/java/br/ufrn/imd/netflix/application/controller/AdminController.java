@@ -38,7 +38,7 @@ public class AdminController extends Controller {
 	@FXML
 	public void carregaLogin() throws IOException{
 		Intent intent = new Intent().fxml(LoginController.FXML_LOGIN);
-		replaceView(intent);
+		getRuntime().replaceMainView(intent);
 	}
         
    

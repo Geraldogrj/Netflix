@@ -9,6 +9,7 @@ public class Intent {
 	
 	private String fxml;
 	private Bundle bundle;
+	private Controller conroller;
 	
 	public Intent() {
 		this.fxml = "";
@@ -20,10 +21,16 @@ public class Intent {
 		return this;
 	}
 	
+	public Intent controller(Controller controller){
+		this.conroller = controller;
+		return this;
+	}
+	
 	public Intent putExtra(String param, Object object){
 		this.bundle.putExtra(param, object);
 		return this;
 	}
+
 	
 	public String getFXML(){
 		return this.fxml;
@@ -31,6 +38,10 @@ public class Intent {
 	
 	public Bundle getExtras(){
 		return this.bundle;
+	}
+	
+	public Controller getController(){
+		return this.conroller;
 	}
 	
 }

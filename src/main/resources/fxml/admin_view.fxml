@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.netflix.application.controller.AdminController">
    <children>
-      <Label fx:id="lblUsuarioLogado" layoutX="14.0" layoutY="14.0" text="Usuário logado" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="15.0" />
+      <Label  fx:id="lblUsuarioLogado" layoutX="14.0" layoutY="14.0" text="Usuário logado" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="15.0" />
       <HBox layoutX="374.0" layoutY="15.0" spacing="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
             <TextField />

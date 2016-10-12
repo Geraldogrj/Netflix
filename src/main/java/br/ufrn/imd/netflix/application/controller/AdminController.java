@@ -20,13 +20,13 @@ public class AdminController extends Controller {
     public static final String FXML_ADMIN = "/fxml/admin_view.fxml";
     	
 	@FXML 
-    private Label lblUsuarioLogado;
+	private Label lblUsuarioLogado;
 
-    @Override
-    public void onCreate(Bundle bundle) {
-    	Usuario usuario = (Usuario) bundle.get("usuario");
-    	lblUsuarioLogado.setText(usuario.getLogin());
-    }
+	@Override
+	public void onCreate(Bundle bundle) {
+		Usuario usuario = (Usuario) bundle.get("usuario");
+		lblUsuarioLogado.setText(usuario.getLogin());
+	}
         
    
 }

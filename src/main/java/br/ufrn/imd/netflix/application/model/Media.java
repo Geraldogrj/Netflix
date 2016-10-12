@@ -15,7 +15,7 @@ import javafx.scene.image.ImageView;
  * @author Geraldo
  */
 @Entity
-@Table(name = "Media")
+@Table(name = "media")
 public class Media extends Model {
 
     private static final long serialVersionUID = 1L;

@@ -5,10 +5,14 @@
  */
 package br.ufrn.imd.netflix.application.controller;
 
+import java.io.IOException;
+
 import br.ufrn.imd.netflix.application.core.Bundle;
 import br.ufrn.imd.netflix.application.core.Controller;
+import br.ufrn.imd.netflix.application.core.Intent;
 import br.ufrn.imd.netflix.application.model.Usuario;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 /**
@@ -21,11 +25,20 @@ public class AdminController extends Controller {
     	
 	@FXML 
 	private Label lblUsuarioLogado;
+	
+	@FXML
+	private Button btnBuscar;
 
 	@Override
 	public void onCreate(Bundle bundle) {
 		Usuario usuario = (Usuario) bundle.get("usuario");
 		lblUsuarioLogado.setText(usuario.getLogin());
+	}
+	
+	@FXML
+	public void carregaLogin() throws IOException{
+		Intent intent = new Intent().fxml(LoginController.FXML_LOGIN);
+		replaceView(intent);
 	}
         
    

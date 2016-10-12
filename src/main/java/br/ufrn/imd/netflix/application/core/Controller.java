@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import br.ufrn.imd.netflix.application.NetflixApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -37,7 +38,7 @@ public abstract class Controller implements Initializable {
 	 * @param params
 	 * @throws IOException
 	 */
-	protected void abrirJanela(Intent intent) throws IOException{
+	protected Controller openWindow(Intent intent) throws IOException{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(intent.getFXML()));
         Parent root = loader.load();
         Controller controller = loader.getController();
@@ -46,13 +47,22 @@ public abstract class Controller implements Initializable {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.show();
+        return controller;
+	}
+	
+	protected void replaceView(Intent intent) throws IOException{
+		NetflixApp.replaceView(intent);
+	}
+	
+	protected void replaceViewAndShow(Intent intent) throws IOException{
+		NetflixApp.replaceViewAndShow(intent);
 	}
 	
 	/**
 	 * Fecha a janela que chamou a ação.
 	 * @param event
 	 */
-	protected void fecharJanela(ActionEvent event){
+	protected void closeWindow(ActionEvent event){
 		 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		 stage.close();
 	}

@@ -44,10 +44,9 @@ public class LoginController extends Controller {
     		Intent intent = new Intent();
     		intent.fxml(AdminController.FXML_ADMIN);
     		intent.putExtra("usuario", usuario);
-//    		Intent adminIntent = new Intent().fxml(AdminController.FXML_ADMIN).putExtra("usuario", usuario);
     		
-            abrirJanela(intent);    
-    		fecharJanela(event);
+    		replaceViewAndShow(intent);
+    		closeWindow(event);
     	}
     	catch (NoResultException e){
     		abrirAlertaInfo("N�o foi poss�vel logar", "Usu�rio ou Senha n�o encontrados...");

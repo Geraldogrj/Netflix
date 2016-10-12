@@ -7,6 +7,9 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -49,7 +52,7 @@
                           <buttons>
                             <Button mnemonicParsing="false" onAction="#cadastrar" text="Salvar" />
                               <Button mnemonicParsing="false" text="Remover" />
-                              <Button mnemonicParsing="false" text="Pesquisar..." />
+                              <Button mnemonicParsing="false" text="Pesquisar por ID" />
                           </buttons>
                         </ButtonBar>
                      </children></AnchorPane>
@@ -74,21 +77,10 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <ImageView fx:id="icoSearch" fitHeight="23.0" fitWidth="33.0" onMouseClicked="#pesquisarPorID" pickOnBounds="true" preserveRatio="true">
-                                 <GridPane.margin>
-                                    <Insets left="160.0" />
-                                 </GridPane.margin>
-                                 <image>
-                                    <Image url="@../../../../../search-icon24.png" />
-                                 </image>
-                              </ImageView>
                               <TextField fx:id="id" maxWidth="-Infinity" promptText="ID" />
                               <TextField fx:id="nome" promptText="Nome" GridPane.rowIndex="1" />
                               <TextField fx:id="descricao" promptText="Descrição" GridPane.rowIndex="2" />
                               <TextField fx:id="ano" maxWidth="-Infinity" prefWidth="80.0" promptText="Ano" GridPane.rowIndex="3" />
-                              <TextField fx:id="diretor" promptText="Diretor" GridPane.rowIndex="4" />
-                              <TextField fx:id="protagonista" promptText="Protagonista" GridPane.rowIndex="5" />
-                              <TextField fx:id="idade" promptText="Faixa Etária" GridPane.rowIndex="6" />
                               <TextField fx:id="temporada" maxWidth="-Infinity" prefWidth="80.0" promptText="Temporada" GridPane.rowIndex="3">
                                  <GridPane.margin>
                                     <Insets left="90.0" />
@@ -109,14 +101,35 @@
                                     <Insets left="360.0" />
                                  </GridPane.margin>
                               </TextField>
+                              <TextField fx:id="diretor" promptText="Diretor" GridPane.rowIndex="4" />
+                              <TextField fx:id="protagonista" promptText="Protagonista" GridPane.rowIndex="5" />
+                              <TextField fx:id="idade" promptText="Faixa Etária" GridPane.rowIndex="6" />
+                              <ImageView fx:id="icoSearch" fitHeight="23.0" fitWidth="33.0" onMouseClicked="#pesquisarPorID" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../search-icon24.png" />
+                                 </image>
+                                 <GridPane.margin>
+                                    <Insets left="170.0" />
+                                 </GridPane.margin>
+                                 <effect>
+                                    <Lighting>
+                                       <bumpInput>
+                                          <Shadow />
+                                       </bumpInput>
+                                       <light>
+                                          <Light.Distant />
+                                       </light>
+                                    </Lighting>
+                                 </effect>
+                              </ImageView>
                            </children>
                         </GridPane>
                         <ImageView fitHeight="90.0" fitWidth="199.0" layoutX="13.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" />
                         <ButtonBar prefHeight="40.0" prefWidth="376.0" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0">
                            <buttons>
                               <Button mnemonicParsing="false" onAction="#salvarMidia" text="Salvar" />
-                              <Button mnemonicParsing="false" text="Remover" />
-                              <Button mnemonicParsing="false" text="Pesquisar..." />
+                              <Button mnemonicParsing="false" onAction="#removerMidia" text="Remover" />
+                              <Button mnemonicParsing="false" onAction="#pesquisarPorID" text="Pesquisar por ID" />
                            </buttons>
                         </ButtonBar>
                      </children></AnchorPane>

@@ -34,15 +34,15 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <TextField promptText="ID" />
-                              <TextField promptText="Nome" GridPane.rowIndex="1" />
-                              <TextField promptText="Login" GridPane.rowIndex="2" />
-                              <TextField promptText="Senha" GridPane.rowIndex="3" />
+                              <TextField fx:id="idUser" promptText="ID" />
+                              <TextField fx:id="nomeUser" promptText="Nome" GridPane.rowIndex="1" />
+                              <TextField fx:id="login" promptText="Login" GridPane.rowIndex="2" />
+                              <TextField fx:id="senha" promptText="Senha" GridPane.rowIndex="3" />
                            </children>
                         </GridPane>
                         <ButtonBar layoutX="378.0" layoutY="273.0" prefHeight="40.0" prefWidth="376.0" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0">
                           <buttons>
-                            <Button mnemonicParsing="false" text="Cadastrar" />
+                            <Button mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" />
                               <Button mnemonicParsing="false" text="Editar" />
                               <Button mnemonicParsing="false" text="Remover" />
                               <Button mnemonicParsing="false" text="Pesquisar..." />
@@ -70,29 +70,29 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <TextField maxWidth="-Infinity" promptText="ID" />
-                              <TextField promptText="Nome" GridPane.rowIndex="1" />
-                              <TextField promptText="Descrição" GridPane.rowIndex="2" />
-                              <TextField maxWidth="-Infinity" prefWidth="80.0" promptText="Ano" GridPane.rowIndex="3" />
-                              <TextField promptText="Diretor" GridPane.rowIndex="4" />
-                              <TextField promptText="Protagonista" GridPane.rowIndex="5" />
-                              <TextField promptText="Faixa Etária" GridPane.rowIndex="6" />
-                              <TextField maxWidth="-Infinity" prefWidth="80.0" promptText="Temporada" GridPane.rowIndex="3">
+                              <TextField fx:id="id" maxWidth="-Infinity" promptText="ID" />
+                              <TextField fx:id="nome" promptText="Nome" GridPane.rowIndex="1" />
+                              <TextField fx:id="descricao" promptText="Descrição" GridPane.rowIndex="2" />
+                              <TextField fx:id="ano" maxWidth="-Infinity" prefWidth="80.0" promptText="Ano" GridPane.rowIndex="3" />
+                              <TextField fx:id="diretor" promptText="Diretor" GridPane.rowIndex="4" />
+                              <TextField fx:id="protagonista" promptText="Protagonista" GridPane.rowIndex="5" />
+                              <TextField fx:id="idade" promptText="Faixa Etária" GridPane.rowIndex="6" />
+                              <TextField fx:id="temporada" maxWidth="-Infinity" prefWidth="80.0" promptText="Temporada" GridPane.rowIndex="3">
                                  <GridPane.margin>
                                     <Insets left="90.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <TextField maxWidth="-Infinity" prefWidth="80.0" promptText="Episódio" GridPane.rowIndex="3">
+                              <TextField fx:id="episodio" maxWidth="-Infinity" prefWidth="80.0" promptText="Episódio" GridPane.rowIndex="3">
                                  <GridPane.margin>
                                     <Insets left="180.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <TextField maxWidth="-Infinity" prefWidth="80.0" promptText="Duração" GridPane.rowIndex="3">
+                              <TextField fx:id="duracao" maxWidth="-Infinity" prefWidth="80.0" promptText="Duração" GridPane.rowIndex="3">
                                  <GridPane.margin>
                                     <Insets left="270.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <TextField maxWidth="-Infinity" prefWidth="140.0" promptText="Categoria" GridPane.rowIndex="3">
+                              <TextField fx:id="categoria" maxWidth="-Infinity" prefWidth="140.0" promptText="Categoria" GridPane.rowIndex="3">
                                  <GridPane.margin>
                                     <Insets left="360.0" />
                                  </GridPane.margin>

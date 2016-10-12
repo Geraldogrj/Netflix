@@ -10,7 +10,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 /**
- * Classe GenÃ©rica para realizar aÃ§Ãµes com banco de dados.
+ * Classe Genérica para realizar ações com banco de dados.
  * @author robertodantas
  *
  * @param <T>

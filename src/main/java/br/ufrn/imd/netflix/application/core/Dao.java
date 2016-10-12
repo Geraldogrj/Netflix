@@ -41,6 +41,7 @@ public class Dao<T extends Model> {
 		}
 		catch (Exception e){
 			tx.rollback();
+			throw e;
 		}
 		
 		return obj;

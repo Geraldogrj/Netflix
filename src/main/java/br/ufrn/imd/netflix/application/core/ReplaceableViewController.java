@@ -54,6 +54,11 @@ public abstract class ReplaceableViewController extends Controller implements IR
 		if(stage.isShowing()) stage.close();
 	}
 	
+	@Override
+	public void replaceView(Parent parent) {
+		onReplace(parent);
+	}
+	
 	protected abstract void onReplace(Parent parent);
 	
 	

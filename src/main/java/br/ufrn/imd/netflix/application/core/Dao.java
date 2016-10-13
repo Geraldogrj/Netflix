@@ -110,7 +110,7 @@ public class Dao<T extends Model> {
 	public List<T> findAll() throws NoResultException {
 		Transaction tx = getCurrentSession().beginTransaction();
 		List<T> objs = null;
-		try {objs = getCurrentSession().createQuery(String.format("select t from %s", entityClass.getSimpleName()), entityClass).getResultList();}
+		try {objs = getCurrentSession().createQuery(String.format("select t from %s t", entityClass.getSimpleName()), entityClass).getResultList();}
 		catch (Exception e) { tx.rollback(); throw e;}
 		return objs;
 	}

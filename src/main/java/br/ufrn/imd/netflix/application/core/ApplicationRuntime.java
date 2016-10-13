@@ -5,41 +5,53 @@ import java.io.IOException;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ProgressIndicator;
 import javafx.stage.Stage;
 
 public class ApplicationRuntime {
 	
-	private static ApplicationRuntime singleton;
+	private static ApplicationRuntime singleton = new ApplicationRuntime();
 	
-	protected IReplaceableViewController mainView;
+	protected Stage mainViewStage;
+	protected IReplaceableViewController mainViewController;
 			
 	private ApplicationRuntime() {}
 	
 	public static ApplicationRuntime getInstance(){
-		if(singleton != null)
-			return singleton;
-		else
-			singleton = new ApplicationRuntime();
-			return singleton;
+		return singleton;
 	}
+	
+
 		
-	public void loadView(IReplaceableViewController view) {
-		this.mainView = view;
+	public void loadView(String fxml) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+		Parent root = loader.load();
+		mainViewController = loader.getController();
+		mainViewStage = new Stage();
+		mainViewStage.setScene(new Scene(root));
 	}
 		
 	public void replaceMainView(Intent intent) throws IOException{
 		ProgressIndicator progressIndicator = new ProgressIndicator(ProgressIndicator.INDETERMINATE_PROGRESS);
 		progressIndicator.setMaxSize(150, 150);
-		mainView.replaceView(progressIndicator);
+		mainViewController.replaceView(progressIndicator);
 		Task<Void> taskReplaceView = new Task<Void>() {
 			@Override
 			protected Void call() throws Exception {
 				Thread.sleep(1000);
 				Platform.runLater(() -> {
 					try {
-						mainView.replaceView(intent);
+						FXMLLoader loader = new FXMLLoader(getClass().getResource(intent.getFXML()));
+						Parent root = loader.load();
+						if(!intent.getExtras().isEmpty()){
+							Controller controller = loader.getController();
+							controller.onCreate(intent.getExtras());
+						}
+						mainViewController.replaceView(root);
 					} 
 					catch (IOException e) {
 						e.printStackTrace();
@@ -56,15 +68,16 @@ public class ApplicationRuntime {
 	}
 	
 	public void replaceMainViewAndShow(Intent intent) throws IOException{
-		mainView.replaceViewAndShow(intent);
+		replaceMainView(intent);
+		showMainView();
 	}
 	
 	public void showMainView(){
-		mainView.show();
+		if(!mainViewStage.isShowing()) mainViewStage.show();
 	}
 	
 	public void closeMainView(){
-		mainView.close();
+		if(mainViewStage.isShowing()) mainViewStage.close();
 	}
 	
 	/**

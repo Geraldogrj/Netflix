@@ -48,6 +48,10 @@ public abstract class Controller implements Initializable {
         stage.show();
         return controller;
 	}
+			
+	protected <T extends Object> WorkIndicatorDialog<T> getWorkingDialog(String message, ActionEvent event, Class<T> clazz){
+		return new WorkIndicatorDialog<>(((Node) event.getSource()).getScene().getWindow(), message);
+	}
 	
 	protected ApplicationRuntime getRuntime(){
 		return ApplicationRuntime.getInstance();

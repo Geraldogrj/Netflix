@@ -23,5 +23,9 @@ public class Bundle {
 	public void putExtra(String name, Object value){
 		params.put(name, value);
 	}
+	
+	public boolean isEmpty(){
+		return params == null && params.isEmpty();
+	}
 
 }

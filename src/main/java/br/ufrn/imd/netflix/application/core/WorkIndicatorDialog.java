@@ -1,7 +1,7 @@
 package br.ufrn.imd.netflix.application.core;
 
+import java.util.concurrent.Callable;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -27,7 +27,7 @@ import javafx.stage.Window;
  * P = Input parameter type. Given to the closure as parameter. Return type is always Integer.
  * (cc) @imifos
  */
-public class WorkIndicatorDialog<P,T> {
+public class WorkIndicatorDialog<T> {
  
     private Task<Object> animationWorker;
     private Task<T> taskWorker;
@@ -41,9 +41,9 @@ public class WorkIndicatorDialog<P,T> {
     private final VBox vbox = new VBox();
  
     /** Placing a listener on this list allows to get notified BY the result when the task has finished. */
-    public ObservableList<T> resultNotificationList = FXCollections.observableArrayList();
+    private ObservableList<T> resultNotificationList = FXCollections.observableArrayList();
  
-    public T resultValue;
+    private T resultValue;
  
     /**
      *
@@ -58,7 +58,7 @@ public class WorkIndicatorDialog<P,T> {
     /**
      * 
      */
-    public void addTaskEndNotification(Consumer<T> c) {
+    public void onFinish(Consumer<T> c) {
         resultNotificationList.addListener((ListChangeListener<? super Object>) n -> {
             resultNotificationList.clear();
             c.accept(resultValue);
@@ -68,12 +68,12 @@ public class WorkIndicatorDialog<P,T> {
     /**
      *
      */
-    public void exec(P parameter, Function<P,T> func) {
+    public void execute(Callable<T> callable) {
         setupDialog();
         setupAnimationThread();
-        setupWorkerThread(parameter, func);
+        setupWorkerThread(callable);
     }
- 
+     
     /**
      *
      */
@@ -125,43 +125,38 @@ public class WorkIndicatorDialog<P,T> {
  
         new Thread(animationWorker).start();
     }
- 
+     
     /**
-     *
-     */
-    private void setupWorkerThread(P parameter, Function<P,T> func) {
-    	 
-        taskWorker = new Task<T>() {
-            @Override
-            public T call() {
-                return func.apply(parameter);
-            }
-        };
+    *
+    */
+   private void setupWorkerThread(Callable<T> func) {
+   	 
+       taskWorker = new Task<T>() {
+           @Override
+           public T call() throws Exception {
+               return func.call();
+           }
+       };
+
+       EventHandler<WorkerStateEvent> eh = event -> {
+           animationWorker.cancel(true);
+           progressIndicator.progressProperty().unbind();
+           dialog.close();
+           try {
+               resultValue = taskWorker.get();
+               resultNotificationList.add(resultValue);   
+           } 
+           catch (Exception e) {
+               throw new RuntimeException(e);
+           }
+       };
+
+       taskWorker.setOnSucceeded(eh);
+       taskWorker.setOnFailed(eh);
+        
+       new Thread(taskWorker).start();
+   }
  
-        EventHandler<WorkerStateEvent> eh = event -> {
-            animationWorker.cancel(true);
-            progressIndicator.progressProperty().unbind();
-            dialog.close();
-            try {
-                resultValue = taskWorker.get();
-                resultNotificationList.add(resultValue);   
-            } 
-            catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        };
  
-        taskWorker.setOnSucceeded(eh);
-        taskWorker.setOnFailed(eh);
-         
-        new Thread(taskWorker).start();
-    }
- 
-    /**
-     * For those that like beans :)
-     */
-    public T getResultValue() {
-        return resultValue;
-    }
  
 }

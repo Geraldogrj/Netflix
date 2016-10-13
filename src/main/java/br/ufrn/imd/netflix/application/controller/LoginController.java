@@ -11,7 +11,6 @@ import br.ufrn.imd.netflix.application.core.WorkIndicatorDialog;
 import br.ufrn.imd.netflix.application.model.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -40,20 +39,18 @@ public class LoginController extends Controller {
     	Dao<Usuario> dao = getDAO(Usuario.class);
     	
     	try{
+
+    		WorkIndicatorDialog<Usuario> task = getWorkingDialog("Carregando usuário...", event, Usuario.class);
     		
-    		Usuario usuario = null;
-    		
-    		WorkIndicatorDialog<Usuario,Usuario> wd = new WorkIndicatorDialog<Usuario, Usuario>(((Node) event.getSource()).getScene().getWindow(), "Carregando Usuário...");
-    		    		
-    		wd.exec(usuario, inputParam -> {
-    			 return dao.queryForOne("select u from Usuario u where u.login = ?0 and u.senha = ?1 ", 
-                        txtLogin.getText(), txtSenha.getText());    			
+    		task.execute(() -> {
+    			return dao.queryForOne("select u from Usuario u where u.login = ?0 and u.senha = ?1 ", 
+                        txtLogin.getText(), txtSenha.getText()); 
     		});
-    		    		
-    		wd.addTaskEndNotification(result -> {
+    		
+    		task.onFinish((usuario) -> {
     			Intent intent = new Intent();
         		intent.fxml(AdminController.FXML_ADMIN);
- 		       	intent.putExtra("usuario", result);
+ 		       	intent.putExtra("usuario", usuario);
  		        try {
 					getRuntime().replaceMainViewAndShow(intent);
 				} 
@@ -62,9 +59,8 @@ public class LoginController extends Controller {
 					e.printStackTrace();
 				}
  	    		getRuntime().closeWindow(event);
-		    });
+    		});
     		    		
-    		
     	}
     	catch (NoResultException e){
     		abrirAlertaInfo("N�o foi poss�vel logar", "Usu�rio ou Senha n�o encontrados...");

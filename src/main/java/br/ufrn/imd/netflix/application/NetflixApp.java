@@ -16,7 +16,7 @@ public class NetflixApp extends Application {
     @Override
     public void start(Stage stage) {
         try { 
-        	getRuntime().loadView(new MainController(MainController.FXML_MAIN));
+        	getRuntime().loadView(MainController.FXML_MAIN);
         	loadLogin(stage);
         } 
         catch (Exception e) {

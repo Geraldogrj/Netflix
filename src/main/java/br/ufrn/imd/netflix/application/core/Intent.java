@@ -10,6 +10,8 @@ public class Intent {
 	private String fxml;
 	private Bundle bundle;
 	private Controller conroller;
+	private boolean loadingDialog;
+	private String loadingText;
 	
 	public Intent() {
 		this.fxml = "";
@@ -30,6 +32,16 @@ public class Intent {
 		this.bundle.putExtra(param, object);
 		return this;
 	}
+	
+	public Intent setLoadingDialog(boolean loadingDialog){
+		this.loadingDialog = loadingDialog;
+		return this;
+	}
+	
+	public Intent setLoadingText(String loadingText){
+		this.loadingText = loadingText;
+		return this;
+	}
 
 	
 	public String getFXML(){
@@ -43,5 +55,15 @@ public class Intent {
 	public Controller getController(){
 		return this.conroller;
 	}
+
+	public boolean isLoadingDialog() {
+		return loadingDialog;
+	}
+
+	public String getLoadingText() {
+		return loadingText;
+	}
+	
+	
 	
 }

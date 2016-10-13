@@ -1,9 +1,5 @@
 package br.ufrn.imd.netflix.application.controller;
 
-import java.io.IOException;
-
-import javax.persistence.NoResultException;
-
 import br.ufrn.imd.netflix.application.core.Controller;
 import br.ufrn.imd.netflix.application.core.Dao;
 import br.ufrn.imd.netflix.application.core.Intent;
@@ -37,35 +33,35 @@ public class LoginController extends Controller {
     public void logar(ActionEvent event){
     	
     	Dao<Usuario> dao = getDAO(Usuario.class);
-    	
-    	try{
 
-    		WorkIndicatorDialog<Usuario> task = getWorkingDialog("Carregando usuário...", event, Usuario.class);
-    		
-    		task.execute(() -> {
-    			return dao.queryForOne("select u from Usuario u where u.login = ?0 and u.senha = ?1 ", 
-                        txtLogin.getText(), txtSenha.getText()); 
-    		});
-    		
-    		task.onFinish((usuario) -> {
+		WorkIndicatorDialog<Usuario> task = getWorkingDialog("Carregando usuário...", event, Usuario.class);
+		
+		task.execute(() -> {
+			return dao.queryForOne("select u from Usuario u where u.login = ?0 and u.senha = ?1 ", 
+                    txtLogin.getText(), txtSenha.getText()); 
+		});
+		
+		task.onFinish((result) -> {
+			if (result != null){
+    			Usuario usuario = result;
     			Intent intent = new Intent();
-        		intent.fxml(AdminController.FXML_ADMIN);
- 		       	intent.putExtra("usuario", usuario);
- 		        try {
-					getRuntime().replaceMainViewAndShow(intent);
-				} 
- 		        catch (IOException e) {
- 		        	abrirAlertaErro("Erro Inesperado!", "N�o foi poss�vel abrir a janela de M�dia...");
-					e.printStackTrace();
-				}
+    			
+    			if("admin".equals(usuario.getLogin())){
+    				intent.fxml(AdminController.FXML_ADMIN);
+    			}
+    			else {
+    				intent.fxml(MediaController.FXML_MEDIA);
+    			}
+    			
+ 		       	intent.putExtra("usuario", result);
+				getRuntime().replaceMainViewAndShow(intent);
  	    		getRuntime().closeWindow(event);
-    		});
-    		    		
-    	}
-    	catch (NoResultException e){
-    		abrirAlertaInfo("N�o foi poss�vel logar", "Usu�rio ou Senha n�o encontrados...");
-    	} 
-     	
+			}
+			else {
+				abrirAlertaErro("Usuário Não Encontrado...", "Usuário não identificado...");
+			}
+		});   		
+   
     }
              
 }

@@ -10,7 +10,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 /**
- * Classe Genérica para realizar ações com banco de dados.
+ * Classe Gen�rica para realizar a��es com banco de dados.
  * @author robertodantas
  *
  * @param <T>
@@ -39,6 +39,9 @@ public class Dao<T extends Model> {
 			obj = getCurrentSession().find(entityClass, id);
 			tx.commit();
 		}
+		catch (NoResultException e){
+			return null;
+		}
 		catch (Exception e){
 			tx.rollback();
 			throw e;
@@ -62,6 +65,9 @@ public class Dao<T extends Model> {
 		try{
 			obj = q.getSingleResult();
 			tx.commit();
+		}
+		catch (NoResultException e){
+			return null;
 		}
 		catch (Exception e){
 			tx.rollback();
@@ -87,6 +93,9 @@ public class Dao<T extends Model> {
 			objs = q.getResultList();
 			tx.commit();
 		}
+		catch (NoResultException e){
+			return null;
+		}
 		catch (Exception e){
 			tx.rollback();
 			throw e;
@@ -111,6 +120,7 @@ public class Dao<T extends Model> {
 		Transaction tx = getCurrentSession().beginTransaction();
 		List<T> objs = null;
 		try {objs = getCurrentSession().createQuery(String.format("select t from %s t", entityClass.getSimpleName()), entityClass).getResultList();}
+		catch (NoResultException e){return null;}
 		catch (Exception e) { tx.rollback(); throw e;}
 		return objs;
 	}

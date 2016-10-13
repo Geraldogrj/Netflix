@@ -59,7 +59,7 @@ public class WorkIndicatorDialog<T> {
      * 
      */
     public void onFinish(Consumer<T> c) {
-        resultNotificationList.addListener((ListChangeListener<? super Object>) n -> {
+        resultNotificationList.addListener((ListChangeListener<T>) n -> {
             resultNotificationList.clear();
             c.accept(resultValue);
         });

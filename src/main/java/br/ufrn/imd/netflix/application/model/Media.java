@@ -1,7 +1,5 @@
 package br.ufrn.imd.netflix.application.model;
 
-import java.util.Calendar;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -25,13 +23,13 @@ public class Media extends Model {
     @Column
     private String descricao;
     @Column
-    private int ano;
+    private Integer ano;
     @Column
-    private int temporada;
+    private Integer temporada;
     @Column
-    private int episodio;
+    private Integer episodio;
     @Column
-    private Calendar duracao;
+    private Integer duracao;
     @Column
     private String categoria;
     @Column
@@ -39,7 +37,7 @@ public class Media extends Model {
     @Column
     private String protagonista;
     @Column
-    private int idade;
+    private Integer idade;
     @Transient
     private ImageView imagem;
     
@@ -47,7 +45,7 @@ public class Media extends Model {
         
     }
 
-    public Media(int id, String nome, String descricao, int ano, int temporada, int episodio, Calendar duracao, String categoria, String diretor, String protagonista, int idade, ImageView imagem) {
+    public Media(Integer id, String nome, String descricao, Integer ano, Integer temporada, Integer episodio, Integer duracao, String categoria, String diretor, String protagonista, Integer idade, ImageView imagem) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
@@ -78,35 +76,35 @@ public class Media extends Model {
         this.descricao = descricao;
     }
 
-    public int getAno() {
+    public Integer getAno() {
         return ano;
     }
 
-    public void setAno(int ano) {
+    public void setAno(Integer ano) {
         this.ano = ano;
     }
 
-    public int getTemporada() {
+    public Integer getTemporada() {
         return temporada;
     }
 
-    public void setTemporada(int temporada) {
+    public void setTemporada(Integer temporada) {
         this.temporada = temporada;
     }
 
-    public int getEpisodio() {
+    public Integer getEpisodio() {
         return episodio;
     }
 
-    public void setEpisodio(int episodio) {
+    public void setEpisodio(Integer episodio) {
         this.episodio = episodio;
     }
 
-    public Calendar getDuracao() {
+    public Integer getDuracao() {
         return duracao;
     }
 
-    public void setDuracao(Calendar duracao) {
+    public void setDuracao(Integer duracao) {
         this.duracao = duracao;
     }
 
@@ -134,11 +132,11 @@ public class Media extends Model {
         this.protagonista = protagonista;
     }
 
-    public int getIdade() {
+    public Integer getIdade() {
         return idade;
     }
 
-    public void setIdade(int idade) {
+    public void setIdade(Integer idade) {
         this.idade = idade;
     }
 

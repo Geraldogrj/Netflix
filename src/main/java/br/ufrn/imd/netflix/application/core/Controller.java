@@ -10,8 +10,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 /**
@@ -50,7 +48,7 @@ public abstract class Controller implements Initializable {
 	}
 			
 	protected <T extends Object> WorkIndicatorDialog<T> getWorkingDialog(String message, ActionEvent event, Class<T> clazz){
-		return new WorkIndicatorDialog<>(((Node) event.getSource()).getScene().getWindow(), message);
+		return new WorkIndicatorDialog<T>(((Node) event.getSource()).getScene().getWindow(), message);
 	}
 	
 	protected ApplicationRuntime getRuntime(){
@@ -58,24 +56,17 @@ public abstract class Controller implements Initializable {
 	}
 			
 	protected void abrirAlertaInfo(String title, String contentText){
-		abrirAlerta(AlertType.INFORMATION, title, contentText);
+		ApplicationRuntime.getInstance().abrirAlertaInfo(title, contentText);
 	}
 	
 	protected void abrirAlertaErro(String title, String contentText){
-		abrirAlerta(AlertType.ERROR, title, contentText);
+		ApplicationRuntime.getInstance().abrirAlertaErro(title, contentText);
 	}
 	
 	protected void abrirAlertaWarn(String title, String contentText){
-		abrirAlerta(AlertType.WARNING, title, contentText);
+		ApplicationRuntime.getInstance().abrirAlertaWarn(title, contentText);
 	}
 	
-	private void abrirAlerta(AlertType alertType, String title, String contentText){
-		Alert alert = new Alert(alertType);
-		alert.setTitle(title);
-		alert.setContentText(contentText);
-		alert.show();
-	}
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		

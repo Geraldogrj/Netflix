@@ -9,7 +9,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class ApplicationRuntime {
@@ -67,9 +69,34 @@ public class ApplicationRuntime {
 		
 	}
 	
-	public void replaceMainViewAndShow(Intent intent) throws IOException{
-		replaceMainView(intent);
+	public void replaceMainViewAndShow(Intent intent) {
+		try {
+			replaceMainView(intent);
+		} 
+		catch (IOException e) {
+			abrirAlertaErro("Erro Inesperado!", "N�o foi poss�vel abrir a janela de M�dia... \n" + e.getMessage());
+			e.printStackTrace();
+		}
 		showMainView();
+	}
+	
+	protected void abrirAlertaInfo(String title, String contentText){
+		abrirAlerta(AlertType.INFORMATION, title, contentText);
+	}
+	
+	protected void abrirAlertaErro(String title, String contentText){
+		abrirAlerta(AlertType.ERROR, title, contentText);
+	}
+	
+	protected void abrirAlertaWarn(String title, String contentText){
+		abrirAlerta(AlertType.WARNING, title, contentText);
+	}
+	
+	private void abrirAlerta(AlertType alertType, String title, String contentText){
+		Alert alert = new Alert(alertType);
+		alert.setTitle(title);
+		alert.setContentText(contentText);
+		alert.show();
 	}
 	
 	public void showMainView(){

@@ -34,7 +34,7 @@ public class LoginController extends Controller {
     	
     	Dao<Usuario> dao = getDAO(Usuario.class);
 
-		WorkIndicatorDialog<Usuario> task = getWorkingDialog("Carregando usu√°rio...", event, Usuario.class);
+		WorkIndicatorDialog<Usuario> task = getWorkingDialog("Carregando usu·rio...", event, Usuario.class);
 		
 		task.execute(() -> {
 			return dao.queryForOne("select u from Usuario u where u.login = ?0 and u.senha = ?1 ", 
@@ -58,7 +58,7 @@ public class LoginController extends Controller {
  	    		getRuntime().closeWindow(event);
 			}
 			else {
-				abrirAlertaErro("Usu√°rio N√£o Encontrado...", "Usu√°rio n√£o identificado...");
+				abrirAlertaErro("Usu·rio N„o Encontrado...", "Usu·rio n„o identificado...");
 			}
 		});   		
    

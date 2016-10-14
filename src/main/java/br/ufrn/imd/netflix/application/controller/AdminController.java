@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.ufrn.imd.netflix.application.controller;
 
 import static java.lang.Integer.parseInt;
@@ -76,10 +71,10 @@ public class AdminController extends Controller {
             usuario.setSenha(senha.getText());
 
             dao.saveOrUpdate(usuario);
-            abrirAlertaInfo("Sucesso", "Usuï¿½rio cadastrado/atualizado com sucesso");
+            abrirAlertaInfo("Sucesso", "Usuário cadastrado/atualizado com sucesso");
         } catch (Exception e) {
             e.printStackTrace();
-            abrirAlertaErro("Erro", "Nï¿½o foi possï¿½vel efetuar o cadastro");
+            abrirAlertaErro("Erro", "Não foi possível efetuar o cadastro");
         }
     }
 
@@ -88,7 +83,7 @@ public class AdminController extends Controller {
             Dao<Media> dao = getDAO(Media.class);
 
             Media media = new Media();
-            media.setId(parseInt(id.getText()));
+          //  media.setId(parseInt(id.getText()));
             media.setNome(nome.getText());
             media.setDescricao(descricao.getText());
             media.setAno(parseInt(ano.getText()));
@@ -102,12 +97,12 @@ public class AdminController extends Controller {
 
             dao.saveOrUpdate(media);
 
-            abrirAlertaInfo("Sucesso", "Mï¿½dia cadastrada/atualizada com sucesso");
+            abrirAlertaInfo("Sucesso", "Mídia cadastrada/atualizada com sucesso");
             apagarCampos();
 
         } catch (Exception e) {
             e.printStackTrace();
-            abrirAlertaErro("Erro", "Nï¿½o foi possï¿½vel cadastrar/atualizar");
+            abrirAlertaErro("Erro", "Não foi possível cadastrar/atualizar");
         }
     }
 
@@ -115,7 +110,7 @@ public class AdminController extends Controller {
         try {
             Dao<Media> dao = getDAO(Media.class);
             
-            Media media = dao.findById((id.getText() != null || "".equals(id.getText())) 
+            Media media = dao.findById((id.getText() == null || "".equals(id.getText())) 
             		? 0 : Integer.valueOf(id.getText()));
             
             if(media != null){
@@ -132,7 +127,7 @@ public class AdminController extends Controller {
 	            idade.setText(media.getIdade().toString());
             }
             else {
-            	abrirAlertaErro("Erro", "Nï¿½o foi possï¿½vel achar o item pesquisado. ");
+            	abrirAlertaErro("Erro", "Não foi possível achar o item pesquisado. ");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -147,11 +142,11 @@ public class AdminController extends Controller {
 
             dao.delete(media);
             
-            abrirAlertaInfo("Sucesso", "Mï¿½dia removida com sucesso");
+            abrirAlertaInfo("Sucesso", "Mídia removida com sucesso");
             apagarCampos();
         } catch (Exception e) {
             e.printStackTrace();
-            abrirAlertaErro("Erro", "Nï¿½o foi possï¿½vel remover a Mï¿½dia");
+            abrirAlertaErro("Erro", "Não foi possível remover a Mídia");
         }
     }
     

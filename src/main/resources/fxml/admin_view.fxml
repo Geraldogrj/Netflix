@@ -18,124 +18,122 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.netflix.application.controller.AdminController">
-   <children>
-      <TabPane layoutY="-7.0" prefHeight="369.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-7.0">
-        <tabs>
-          <Tab text="Usuário">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+
+<TabPane prefHeight="369.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.netflix.application.controller.AdminController">
+  <tabs>
+    <Tab text="Usuário">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <GridPane layoutX="26.0" layoutY="14.0" vgap="10.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="15.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
                      <children>
-                        <GridPane layoutX="26.0" layoutY="14.0" vgap="10.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="15.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <TextField fx:id="nomeUser" promptText="Nome" />
-                              <TextField fx:id="login" promptText="Login" GridPane.rowIndex="1" />
-                              <TextField fx:id="senha" promptText="Senha" GridPane.rowIndex="2" />
-                           </children>
-                        </GridPane>
-                        <ButtonBar layoutX="378.0" layoutY="273.0" prefHeight="40.0" prefWidth="376.0" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0">
-                          <buttons>
-                            <Button mnemonicParsing="false" onAction="#cadastrar" text="Salvar" />
-                              <Button mnemonicParsing="false" text="Remover" />
-                              <Button mnemonicParsing="false" text="Pesquisar por ID" />
-                          </buttons>
-                        </ButtonBar>
-                        <Label layoutX="30.0" layoutY="334.0" text="Usuário Logado:" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
-                        <Label fx:id="lblUsuarioLogado" layoutX="104.0" layoutY="349.0" text="Label" textFill="#0d0de4" AnchorPane.bottomAnchor="10.0">
-                           <font>
-                              <Font name="System Bold Italic" size="12.0" />
-                           </font>
-                        </Label>
+                        <TextField fx:id="nomeUser" promptText="Nome" />
+                        <TextField fx:id="login" promptText="Login" GridPane.rowIndex="1" />
+                        <TextField fx:id="senha" promptText="Senha" GridPane.rowIndex="2" />
                      </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="Mídia">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  </GridPane>
+                  <ButtonBar layoutX="378.0" layoutY="273.0" prefHeight="40.0" prefWidth="376.0" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                    <buttons>
+                      <Button mnemonicParsing="false" onAction="#cadastrar" text="Salvar" />
+                        <Button mnemonicParsing="false" text="Remover" />
+                        <Button mnemonicParsing="false" text="Pesquisar por ID" />
+                    </buttons>
+                  </ButtonBar>
+                  <Label layoutX="30.0" layoutY="334.0" text="Usuário Logado:" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
+                  <Label fx:id="lblUsuarioLogado" layoutX="104.0" layoutY="349.0" text="Label" textFill="#0d0de4" AnchorPane.bottomAnchor="10.0">
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="Mídia">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <GridPane layoutY="14.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="15.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
                      <children>
-                        <GridPane layoutY="14.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="15.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <TextField fx:id="id" maxWidth="-Infinity" promptText="ID" />
-                              <TextField fx:id="nome" promptText="Nome" GridPane.rowIndex="1" />
-                              <TextField fx:id="descricao" promptText="Descrição" GridPane.rowIndex="2" />
-                              <TextField fx:id="ano" maxWidth="-Infinity" prefWidth="80.0" promptText="Ano" GridPane.rowIndex="3" />
-                              <TextField fx:id="temporada" maxWidth="-Infinity" prefWidth="80.0" promptText="Temporada" GridPane.rowIndex="3">
-                                 <GridPane.margin>
-                                    <Insets left="90.0" />
-                                 </GridPane.margin>
-                              </TextField>
-                              <TextField fx:id="episodio" maxWidth="-Infinity" prefWidth="80.0" promptText="Episódio" GridPane.rowIndex="3">
-                                 <GridPane.margin>
-                                    <Insets left="180.0" />
-                                 </GridPane.margin>
-                              </TextField>
-                              <TextField fx:id="duracao" maxWidth="-Infinity" prefWidth="80.0" promptText="Duração" GridPane.rowIndex="3">
-                                 <GridPane.margin>
-                                    <Insets left="270.0" />
-                                 </GridPane.margin>
-                              </TextField>
-                              <TextField fx:id="categoria" maxWidth="-Infinity" prefWidth="140.0" promptText="Categoria" GridPane.rowIndex="3">
-                                 <GridPane.margin>
-                                    <Insets left="360.0" />
-                                 </GridPane.margin>
-                              </TextField>
-                              <TextField fx:id="diretor" promptText="Diretor" GridPane.rowIndex="4" />
-                              <TextField fx:id="protagonista" promptText="Protagonista" GridPane.rowIndex="5" />
-                              <TextField fx:id="idade" promptText="Faixa Etária" GridPane.rowIndex="6" />
-                              <ImageView fx:id="icoSearch" fitHeight="23.0" fitWidth="33.0" onMouseClicked="#pesquisarPorID" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../../../search-icon24.png" />
-                                 </image>
-                                 <effect>
-                                    <Lighting>
-                                       <bumpInput>
-                                          <Shadow />
-                                       </bumpInput>
-                                       <light>
-                                          <Light.Distant />
-                                       </light>
-                                    </Lighting>
-                                 </effect>
-                                 <GridPane.margin>
-                                    <Insets left="160.0" />
-                                 </GridPane.margin>
-                              </ImageView>
-                           </children>
-                        </GridPane>
-                        <ImageView fitHeight="118.0" fitWidth="199.0" layoutX="44.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="44.0" />
-                        <ButtonBar prefHeight="40.0" prefWidth="376.0" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0">
-                           <buttons>
-                              <Button mnemonicParsing="false" onAction="#salvarMidia" text="Salvar" />
-                              <Button mnemonicParsing="false" onAction="#removerMidia" text="Remover" />
-                              <Button mnemonicParsing="false" onAction="#pesquisarPorID" text="Pesquisar por ID" />
-                           </buttons>
-                        </ButtonBar>
-                     </children></AnchorPane>
-            </content>
-          </Tab>
-        </tabs>
-      </TabPane>
-   </children>
-</AnchorPane>
+                        <TextField fx:id="id" maxWidth="-Infinity" promptText="ID" />
+                        <TextField fx:id="nome" promptText="Nome" GridPane.rowIndex="1" />
+                        <TextField fx:id="descricao" promptText="Descrição" GridPane.rowIndex="2" />
+                        <TextField fx:id="ano" maxWidth="-Infinity" prefWidth="80.0" promptText="Ano" GridPane.rowIndex="3" />
+                        <TextField fx:id="temporada" maxWidth="-Infinity" prefWidth="80.0" promptText="Temporada" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets left="90.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="episodio" maxWidth="-Infinity" prefWidth="80.0" promptText="Episódio" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets left="180.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="duracao" maxWidth="-Infinity" prefWidth="80.0" promptText="Duração" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets left="270.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="categoria" maxWidth="-Infinity" prefWidth="140.0" promptText="Categoria" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets left="360.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="diretor" promptText="Diretor" GridPane.rowIndex="4" />
+                        <TextField fx:id="protagonista" promptText="Protagonista" GridPane.rowIndex="5" />
+                        <TextField fx:id="idade" promptText="Faixa Etária" GridPane.rowIndex="6" />
+                        <ImageView fx:id="icoSearch" fitHeight="23.0" fitWidth="33.0" onMouseClicked="#pesquisarPorID" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../search-icon24.png" />
+                           </image>
+                           <effect>
+                              <Lighting>
+                                 <bumpInput>
+                                    <Shadow />
+                                 </bumpInput>
+                                 <light>
+                                    <Light.Distant />
+                                 </light>
+                              </Lighting>
+                           </effect>
+                           <GridPane.margin>
+                              <Insets left="160.0" />
+                           </GridPane.margin>
+                        </ImageView>
+                     </children>
+                  </GridPane>
+                  <ImageView fitHeight="118.0" fitWidth="199.0" layoutX="44.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="44.0" />
+                  <ButtonBar prefHeight="40.0" prefWidth="376.0" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                     <buttons>
+                        <Button mnemonicParsing="false" onAction="#salvarMidia" text="Salvar" />
+                        <Button mnemonicParsing="false" onAction="#removerMidia" text="Remover" />
+                        <Button mnemonicParsing="false" onAction="#pesquisarPorID" text="Pesquisar por ID" />
+                     </buttons>
+                  </ButtonBar>
+               </children>
+            </AnchorPane>
+      </content>
+    </Tab>
+  </tabs>
+</TabPane>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane id="AnchorPane" prefHeight="200.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.netflix.application.controller.LoginController">
+   <children>
+      <Pane layoutX="14.0" layoutY="14.0" prefHeight="207.0" prefWidth="381.0" style="-fx-background-color: #708090;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <JFXTextField fx:id="txtLogin" focusColor="#16d6e4" labelFloat="true" layoutX="68.0" layoutY="38.0" maxWidth="245.0" minWidth="245.0" prefHeight="31.0" prefWidth="245.0" promptText="Login" unFocusColor="WHITE" />
+            <JFXPasswordField fx:id="txtSenha" focusColor="#16d6e4" labelFloat="true" layoutX="68.0" layoutY="88.0" maxWidth="245.0" minWidth="245.0" prefHeight="31.0" prefWidth="245.0" promptText="Senha" unFocusColor="WHITE" />
+            <JFXButton fx:id="btnLogar" layoutX="207.0" layoutY="141.0" onAction="#logar" prefHeight="38.0" prefWidth="95.0" ripplerFill="WHITE" style="-fx-background-color: #4B0082;" text="Logar" textFill="#f5f5f5" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

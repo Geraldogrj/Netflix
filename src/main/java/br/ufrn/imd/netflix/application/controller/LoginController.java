@@ -18,7 +18,7 @@ import javafx.scene.image.ImageView;
  */
 public class LoginController extends Controller {
     
-    public static final String FXML_LOGIN = "/fxml/login_view.fxml";
+    public static final String FXML_LOGIN = "/fxml/login2_view.fxml";
 
     @FXML
     private TextField txtLogin;
@@ -26,8 +26,8 @@ public class LoginController extends Controller {
     private TextField txtSenha;
     @FXML
     private Button btnLogar;
-    @FXML
-    private ImageView imgNetflix;
+//    @FXML
+ //   private ImageView imgNetflix;
           
     @FXML
     public void logar(ActionEvent event){

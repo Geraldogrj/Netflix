@@ -7,8 +7,10 @@ import br.ufrn.imd.netflix.application.core.Controller;
 import br.ufrn.imd.netflix.application.core.Dao;
 import br.ufrn.imd.netflix.application.model.Media;
 import br.ufrn.imd.netflix.application.model.Usuario;
+import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
@@ -18,7 +20,7 @@ import javafx.scene.image.ImageView;
  */
 public class AdminController extends Controller {
 
-    public static final String FXML_ADMIN = "/fxml/admin_view.fxml";
+    public static final String FXML_ADMIN = "/fxml/admin2_view.fxml";
     
     @FXML
     private Label lblUsuarioLogado;
@@ -54,7 +56,10 @@ public class AdminController extends Controller {
     private TextField idade;
     @FXML
     private ImageView icoSearch;
+//    @FXML
+//    private TableView<Usuario> tbUser;
 
+     
     @Override
     public void onCreate(Bundle bundle) {
         Usuario usuario = (Usuario) bundle.get("usuario");
@@ -164,5 +169,10 @@ public class AdminController extends Controller {
         categoria.setText("");
     }
     
+    public void setarImagem(){
+        
+    }
+    
+  
 
 }

@@ -18,8 +18,13 @@ public class ApplicationRuntime {
 	
 	private static ApplicationRuntime singleton = new ApplicationRuntime();
 	
+	/** Atributo que armazena a stage janela principal */
 	protected Stage mainViewStage;
 	
+	/** 
+	 * Atributo que armazena o controlador da janela principal
+	 * Respons�vel por realizar as trocas de conte�dos de dentro. 
+	 */
 	protected IReplaceableViewController mainViewController;
 			
 	private ApplicationRuntime() {}
@@ -31,7 +36,8 @@ public class ApplicationRuntime {
 	public void setMainViewBundle(Bundle bundle) {
 		mainViewController.replaceBundle(bundle);
 	}
-		
+	
+	/** Carrega a janela principal */
 	public void loadView(String fxml) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
 		Parent root = loader.load();
@@ -40,6 +46,7 @@ public class ApplicationRuntime {
 		mainViewStage.setScene(new Scene(root));
 	}
 	
+	/** Carrega a janela principal com conte�do */
 	public void loadView(String fxml, Bundle bundle) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
 		Parent root = loader.load();
@@ -50,6 +57,7 @@ public class ApplicationRuntime {
 		mainViewStage.setScene(new Scene(root));
 	}
 		
+	/** Substitui o conte�do da janela principal */
 	public void replaceMainView(Intent intent) throws IOException{
 		ProgressIndicator progressIndicator = new ProgressIndicator(ProgressIndicator.INDETERMINATE_PROGRESS);
 		progressIndicator.setMaxSize(150, 150);
@@ -66,6 +74,7 @@ public class ApplicationRuntime {
 							Controller controller = loader.getController();
 							controller.onCreate(intent.getExtras());
 						}
+						mainViewStage.setTitle(intent.getTitle());
 						mainViewController.replaceView(root);
 					} 
 					catch (IOException e) {
@@ -82,6 +91,7 @@ public class ApplicationRuntime {
 		
 	}
 	
+	/** Substitui o conte�do da janela principal e exibe a janela caso esteja escondida */
 	public void replaceMainViewAndShow(Intent intent) {
 		try {
 			replaceMainView(intent);
@@ -93,14 +103,17 @@ public class ApplicationRuntime {
 		showMainView();
 	}
 	
+	/** Abre popup de Informacao */
 	protected void abrirAlertaInfo(String title, String contentText){
 		abrirAlerta(AlertType.INFORMATION, title, contentText);
 	}
 	
+	/** Abre popup de Erro */
 	protected void abrirAlertaErro(String title, String contentText){
 		abrirAlerta(AlertType.ERROR, title, contentText);
 	}
 	
+	/** Abre popup de Warning */
 	protected void abrirAlertaWarn(String title, String contentText){
 		abrirAlerta(AlertType.WARNING, title, contentText);
 	}

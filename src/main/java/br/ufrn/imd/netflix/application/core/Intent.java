@@ -1,7 +1,7 @@
 package br.ufrn.imd.netflix.application.core;
 
 /**
- * Classe respons√°vel por demonstrar uma inten√ß√£o de abrir uma nova janela.
+ * Classe respons·vel por demonstrar uma intenÁ„o de abrir uma nova janela.
  * @author Roberto Dantas
  *
  */
@@ -12,10 +12,12 @@ public class Intent {
 	private Controller conroller;
 	private boolean loadingDialog;
 	private String loadingText;
+	private String title;
 	
 	public Intent() {
 		this.fxml = "";
 		this.bundle = new Bundle();
+		this.title = "";
 	}
 	
 	public Intent fxml(String fxml){
@@ -33,17 +35,21 @@ public class Intent {
 		return this;
 	}
 	
-	public Intent setLoadingDialog(boolean loadingDialog){
+	public Intent loadingDialog(boolean loadingDialog){
 		this.loadingDialog = loadingDialog;
 		return this;
 	}
 	
-	public Intent setLoadingText(String loadingText){
+	public Intent loadingText(String loadingText){
 		this.loadingText = loadingText;
 		return this;
 	}
-
 	
+	public Intent title(String title){
+		this.title = title;
+		return this;
+	}
+
 	public String getFXML(){
 		return this.fxml;
 	}
@@ -62,6 +68,10 @@ public class Intent {
 
 	public String getLoadingText() {
 		return loadingText;
+	}
+	
+	public String getTitle(){
+		return title;
 	}
 	
 	

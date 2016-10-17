@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
+	
+
   <session-factory>
-    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://localhost/netflix?useSSL=true</property>
+    <property name="hibernate.connection.driver_class">org.hsqldb.jdbcDriver</property>
+    <property name="hibernate.connection.url">jdbc:hsqldb:mem:netflix</property>
     <property name="hibernate.connection.verifyServerCertificate">false</property>
     <property name="hibernate.connection.autoReconnect">true</property>
-    <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">12345678</property>
-    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.username">sa</property>
+    <property name="hibernate.connection.password">1</property>
+    <property name="hibernate.dialect">org.hibernate.dialect.HSQLDialect</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.format_sql">false</property>
-    <property name="hibernate.hbm2ddl.auto">update</property>
+    <property name="hibernate.hbm2ddl.auto">create</property>
    	<property name="hibernate.current_session_context_class">thread</property>
    	<property name="hibernate.connection.autocommit">true</property>
    
@@ -27,6 +29,9 @@
     <property name="hibernate.c3p0.acquireRetryDelay">250</property>
     <property name="hibernate.connection.provider_class">org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider</property>
    
+   	<property name="hibernate.hbm2ddl.import_files">
+   		sql/populate.sql
+   	</property>
    
     <mapping class="br.ufrn.imd.netflix.application.model.Media"/>
   	<mapping class="br.ufrn.imd.netflix.application.model.Usuario"/>

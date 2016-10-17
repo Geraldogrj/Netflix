@@ -14,14 +14,14 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
- * Classe respons√°vel por definir os m√©todos comuns de Controllers.
+ * Classe respons·vel por definir os mÈtodos comuns de Controllers.
  * @author Roberto Dantas
  *
  */
 public abstract class Controller implements Initializable {
 		
 	/**
-	 * Retorna o DAO gen√©rico referente a classe que extends Model.
+	 * Retorna o DAO genÈrico referente a classe que extends Model.
 	 * @param clazz
 	 * @return
 	 */
@@ -31,7 +31,7 @@ public abstract class Controller implements Initializable {
 			
 	/**
 	 * Carrega um FXML com parametros.
-	 * Observa√ß√£o: O FXML deve possuir um fx:controller definido.
+	 * ObservaÁ„o: O FXML deve possuir um fx:controller definido.
 	 * @param fxml
 	 * @param params
 	 * @throws IOException

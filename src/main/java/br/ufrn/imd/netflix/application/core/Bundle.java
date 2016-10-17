@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Classe responsável por encapsular os parâmetros da solicitação de uma nova janela
+ * Classe responsavel por encapsular as informacoes necessarrias para uma nova janela
  * @author Roberto Dantas
  *
  */

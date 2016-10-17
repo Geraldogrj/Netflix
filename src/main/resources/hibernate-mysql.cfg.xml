@@ -3,7 +3,7 @@
 <hibernate-configuration>
 	
 
-  <session-factory name="mysql">
+  <session-factory>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost/netflix?useSSL=true</property>
     <property name="hibernate.connection.verifyServerCertificate">false</property>

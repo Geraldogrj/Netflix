@@ -4,12 +4,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.sound.sampled.Control;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputControl;
 import javafx.stage.Stage;
 
 /**
@@ -74,6 +78,18 @@ public abstract class Controller implements Initializable {
 	
 	public void onCreate(Bundle bundle){
 		
+	}
+	
+	public void setDisableCampos(TextField[] fields, boolean disabled){
+		for (int i = 0; i < fields.length; i++){
+			fields[i].setDisable(disabled);	
+		}
+	}
+	
+	public void resetTexts(TextField[] fields){
+		for (int i = 0; i < fields.length; i++){
+			fields[i].setText("");
+		}
 	}
 		
 

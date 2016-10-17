@@ -30,58 +30,47 @@ public class AdminController extends Controller {
     private Usuario userSelecionado;
     
     /** Dados de gerenciar usuario */
-    @FXML
-    private TextField userNome;
-    @FXML
-    private TextField userLogin;
-    @FXML
-    private TextField userSenha;
-    @FXML
-    private Button userNovo;
-    @FXML
-    private Button userSalvar;
-    @FXML 
-    private Button userRemover;
-    @FXML
-    private TableView<Usuario> userTableView;
-    @FXML
-    private TableColumn<Usuario, Object> userIdColumn;
-    @FXML
-    private TableColumn<Usuario, Object> userNomeColumn;
-    @FXML
-    private TableColumn<Usuario, Object> userLoginColumn;
-    @FXML
-    private TableColumn<Usuario, Object> userSenhaColumn;
+    @FXML    private TextField userNome;
+    @FXML    private TextField userLogin;
+    @FXML    private TextField userSenha;
+    @FXML    private Button userNovo;
+    @FXML    private Button userSalvar;
+    @FXML    private Button userRemover;
+    @FXML    private TableView<Usuario> userTableView;
+    @FXML    private TableColumn<Usuario, Object> userIdColumn;
+    @FXML    private TableColumn<Usuario, Object> userNomeColumn;
+    @FXML    private TableColumn<Usuario, Object> userLoginColumn;
+    @FXML    private TableColumn<Usuario, Object> userSenhaColumn;
+    
+    /** Dados de gerenciar mídia  */
+    private Media mediaSelecionada;
            
     /** Dados da tabela gerenciar mídia */
-    @FXML
-    private TextField id;
-    @FXML
-    private TextField nome;
-    @FXML
-    private TextField descricao;
-    @FXML
-    private TextField ano;
-    @FXML
-    private TextField temporada;
-    @FXML
-    private TextField episodio;
-    @FXML
-    private TextField duracao;
-    @FXML
-    private TextField categoria;
-    @FXML
-    private TextField diretor;
-    @FXML
-    private TextField protagonista;
-    @FXML
-    private TextField idade;
-    @FXML
-    private ImageView icoSearch;
-
-     
+    @FXML    private TextField mediaNome;
+    @FXML    private TextField mediaDescricao;
+    @FXML    private TextField mediaAno;
+    @FXML    private TextField mediaTemporada;
+    @FXML    private TextField mediaEpisodio;
+    @FXML    private TextField mediaDuracao;
+    @FXML    private TextField mediaCategoria;
+    @FXML    private TextField mediaDiretor;
+    @FXML    private TextField mediaProtagonista;
+    @FXML	 private TextField mediaClassificacao;
+    @FXML    private ImageView mediaIconSearch;
+    @FXML    private Button mediaNovo;
+    @FXML    private Button mediaSalvar;
+    @FXML    private Button mediaRemover;
+    @FXML	 private TableView<Media> mediaTableView;
+    @FXML    private TableColumn<Media, Object> mediaIdColumn;
+    @FXML    private TableColumn<Media, Object> mediaNomeColumn;
+    @FXML    private TableColumn<Media, Object> mediaAnoColumn;
+    
+    private TextField[] FIELDS_USUARIO;
+    private TextField[] FIELDS_MEDIA;
+         
     @Override
-    public void onCreate(Bundle bundle) {                
+    public void onCreate(Bundle bundle) {  
+    	/** listagem de usuarios */
         userTableView.getSelectionModel().selectedItemProperty().addListener(
         		(observable, oldValue, selecionado) -> { acaoSelecionarUsuario(selecionado); });
 
@@ -90,7 +79,22 @@ public class AdminController extends Controller {
         userLoginColumn.setCellValueFactory(new PropertyValueFactory<Usuario,Object>("login"));
         userSenhaColumn.setCellValueFactory(new PropertyValueFactory<Usuario,Object>("senha"));
         
+        /** listagem de medias */
+        mediaTableView.getSelectionModel().selectedItemProperty().addListener(
+        		(observable, oldValue, selecionado) -> { acaoSelecionarMedia(selecionado); });
+        
+        mediaIdColumn.setCellValueFactory(new PropertyValueFactory<Media,Object>("id"));
+        mediaNomeColumn.setCellValueFactory(new PropertyValueFactory<Media,Object>("nome"));
+        mediaAnoColumn.setCellValueFactory(new PropertyValueFactory<Media,Object>("ano"));
+        
         atualizarListagemUsuarios();
+        atualizarListagemMedia();
+        
+        FIELDS_USUARIO = new TextField[]{userNome, userLogin, userSenha};
+        
+        FIELDS_MEDIA = new TextField[]{mediaNome, mediaDescricao, mediaAno, mediaTemporada, 
+        		mediaEpisodio, mediaDuracao, mediaCategoria, mediaDiretor, mediaProtagonista, mediaClassificacao};
+
         
     }
     
@@ -101,12 +105,32 @@ public class AdminController extends Controller {
         userTableView.refresh();
     }
     
+	private void atualizarListagemMedia() {
+		Dao<Media> dao = getDAO(Media.class);
+		List<Media> medias = dao.findAll();
+		mediaTableView.setItems(FXCollections.observableArrayList(medias));
+		mediaTableView.refresh();
+	}
+    
     public void acaoSelecionarUsuario(Usuario usuario){
     	if(usuario != null){
 	    	userSelecionado = usuario;
-	    	userNome.setDisable(false);
-	    	userLogin.setDisable(false);
-	    	userSenha.setDisable(false);
+	    	setDisableCampos(FIELDS_USUARIO,false);
+	    	userNovo.setText("Cancelar");  
+	    	userNovo.setOnAction(e -> { this.acaoCancelarUsuario(); });
+	    	userSalvar.setDisable(false);
+	    	userRemover.setDisable(false);
+	    	
+	    	userNome.setText(userSelecionado.getNome());
+	    	userLogin.setText(userSelecionado.getLogin());
+	    	userSenha.setText(userSelecionado.getSenha());
+    	}
+    }
+    
+    public void acaoSelecionarMedia(Media media){
+    	if(media != null){
+	    	mediaSelecionada = media;
+	    	setDisableCampos(FIELDS_MEDIA, false);
 	    	userNovo.setText("Cancelar");  
 	    	userNovo.setOnAction(e -> { this.acaoCancelarUsuario(); });
 	    	userSalvar.setDisable(false);
@@ -120,29 +144,42 @@ public class AdminController extends Controller {
     
     public void acaoNovoUsuario(){
     	userSelecionado = new Usuario();
-    	userNome.setDisable(false);
-    	userLogin.setDisable(false);
-    	userSenha.setDisable(false);
+    	setDisableCampos(FIELDS_USUARIO, false);
     	userNovo.setText("Cancelar");  
     	userNovo.setOnAction(e -> { this.acaoCancelarUsuario(); });
     	userSalvar.setDisable(false);
     	userRemover.setDisable(false);
     }
     
+    public void acaoNovoMedia() {
+		mediaSelecionada = new Media();
+		setDisableCampos(FIELDS_MEDIA, false);
+		mediaNovo.setText("Cancelar");
+		mediaNovo.setOnAction(e -> { this.acaoCancelarMedia(); });
+		mediaSalvar.setDisable(false);
+		mediaRemover.setDisable(false);
+	}
+    
     public void acaoCancelarUsuario(){
     	apagarCamposUsuario();
     	userSelecionado = null;
-    	userNome.setDisable(true);
-    	userLogin.setDisable(true);
-    	userSenha.setDisable(true);
+    	setDisableCampos(FIELDS_USUARIO,true);
     	userNovo.setText("Novo");  
     	userNovo.setOnAction(e -> { this.acaoNovoUsuario(); });
     	userSalvar.setDisable(true);
     	userRemover.setDisable(true);
-    	
     }
+    
+    
+    private void acaoCancelarMedia() {
+		apagarCamposMedia();
+		mediaSelecionada = null;
+		setDisableCampos(FIELDS_MEDIA, true);
+		mediaNovo.setText("Novo");
+		mediaNovo.setOnAction(e -> { this.acaoNovoMedia(); });
+	}
 
-    @FXML
+	@FXML
     public void acaoSalvarUsuario() {
         try {
             Dao<Usuario> dao = getDAO(Usuario.class);
@@ -162,7 +199,50 @@ public class AdminController extends Controller {
         }
     }
     
-    public void acaoRemoverUsuario(){
+    public void acaoSalvarMedia() {
+        try {
+            Dao<Media> dao = getDAO(Media.class);
+
+            mediaSelecionada.setNome(mediaNome.getText());
+            mediaSelecionada.setDescricao(mediaDescricao.getText());
+            mediaSelecionada.setAno(parseInt(mediaAno.getText()));
+            mediaSelecionada.setTemporada(parseInt(mediaTemporada.getText()));
+            mediaSelecionada.setEpisodio(parseInt(mediaEpisodio.getText()));
+            mediaSelecionada.setDuracao(parseInt(mediaDuracao.getText()));
+            mediaSelecionada.setCategoria(mediaCategoria.getText());
+            mediaSelecionada.setDiretor(mediaDiretor.getText());
+            mediaSelecionada.setProtagonista(mediaProtagonista.getText());
+            mediaSelecionada.setIdade(parseInt(mediaClassificacao.getText()));
+
+            dao.saveOrUpdate(mediaSelecionada);
+            acaoCancelarMedia();
+            atualizarListagemMedia();
+            abrirAlertaInfo("Sucesso", "Mídia cadastrada/atualizada com sucesso");
+            
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            abrirAlertaErro("Erro", "Não foi possível cadastrar/atualizar");
+        }
+    }
+
+    public void acaoRemoverMedia() {
+    	if(mediaSelecionada != null && mediaSelecionada.getId() > 0){
+	    	try {
+	            Dao<Media> dao = getDAO(Media.class);	
+	            dao.delete(mediaSelecionada);
+	            acaoCancelarMedia();
+	            atualizarListagemMedia();
+	            abrirAlertaInfo("Sucesso", "Mídia removida com sucesso");
+	            apagarCamposMedia();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            abrirAlertaErro("Erro", "Não foi possível remover a Mídia");
+	        }
+    	}
+    }
+
+	public void acaoRemoverUsuario(){
     	if(userSelecionado != null && userSelecionado.getId() > 0){
 	    	try {
 	    		Dao<Usuario> dao = getDAO(Usuario.class);
@@ -176,103 +256,15 @@ public class AdminController extends Controller {
 	        }
     	}
     }
-
-    public void acaoSalvarMidia() {
-        try {
-            Dao<Media> dao = getDAO(Media.class);
-
-            Media media = new Media();
-          //  media.setId(parseInt(id.getText()));
-            media.setNome(nome.getText());
-            media.setDescricao(descricao.getText());
-            media.setAno(parseInt(ano.getText()));
-            media.setTemporada(parseInt(temporada.getText()));
-            media.setEpisodio(parseInt(episodio.getText()));
-            media.setDuracao(parseInt(duracao.getText()));
-            media.setCategoria(categoria.getText());
-            media.setDiretor(diretor.getText());
-            media.setProtagonista(protagonista.getText());
-            media.setIdade(parseInt(idade.getText()));
-
-            dao.saveOrUpdate(media);
-
-            abrirAlertaInfo("Sucesso", "Mídia cadastrada/atualizada com sucesso");
-            apagarCampos();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            abrirAlertaErro("Erro", "Não foi possível cadastrar/atualizar");
-        }
-    }
-
-/*    public void pesquisarPorID() {
-        try {
-            Dao<Media> dao = getDAO(Media.class);
-            
-            Media media = dao.findById((id.getText() == null || "".equals(id.getText())) 
-            		? 0 : Integer.valueOf(id.getText()));
-            
-            if(media != null){
-	            id.setText(media.getId().toString());
-	            nome.setText(media.getNome());
-	            descricao.setText(media.getDescricao());
-	            ano.setText(media.getAno().toString());
-	            temporada.setText(media.getTemporada().toString());
-	            episodio.setText(media.getEpisodio().toString());
-	            duracao.setText(media.getDuracao().toString());
-	            categoria.setText(media.getCategoria());
-	            diretor.setText(media.getDiretor());
-	            protagonista.setText(media.getProtagonista());
-	            idade.setText(media.getIdade().toString());
-            }
-            else {
-            	abrirAlertaErro("Erro", "Não foi possível achar o item pesquisado. ");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            abrirAlertaErro("Erro", e.getCause() + e.getMessage());
-        }
-    }*/
-
-    public void acaoRemoverMidia() {
-        try {
-            Dao<Media> dao = getDAO(Media.class);
-            Media media = dao.findById(parseInt(id.getText()));
-
-            dao.delete(media);
-            
-            abrirAlertaInfo("Sucesso", "Mídia removida com sucesso");
-            apagarCampos();
-        } catch (Exception e) {
-            e.printStackTrace();
-            abrirAlertaErro("Erro", "Não foi possível remover a Mídia");
-        }
-    }
     
-    public void apagarCampos(){
-        id.setText("");
-        nome.setText("");
-        descricao.setText("");
-        ano.setText("");
-        temporada.setText("");
-        episodio.setText("");
-        duracao.setText("");
-        diretor.setText("");
-        protagonista.setText("");
-        idade.setText("");
-        categoria.setText("");
+    public void apagarCamposMedia(){
+    	resetTexts(FIELDS_MEDIA);
     }
     
     public void apagarCamposUsuario(){
-    	userNome.setText("");
-    	userLogin.setText("");
-    	userSenha.setText("");
+    	resetTexts(FIELDS_USUARIO);
     }
-    
-    public void setarImagem(){
         
-    }
-    
   
 
 }

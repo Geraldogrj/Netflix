@@ -131,14 +131,22 @@ public class AdminController extends Controller {
     	if(media != null){
 	    	mediaSelecionada = media;
 	    	setDisableCampos(FIELDS_MEDIA, false);
-	    	userNovo.setText("Cancelar");  
-	    	userNovo.setOnAction(e -> { this.acaoCancelarUsuario(); });
-	    	userSalvar.setDisable(false);
-	    	userRemover.setDisable(false);
+	    	mediaNovo.setText("Cancelar");  
+	    	mediaNovo.setOnAction(e -> { this.acaoCancelarMedia(); });
+	    	mediaSalvar.setDisable(false);
+	    	mediaRemover.setDisable(false);
 	    	
-	    	userNome.setText(userSelecionado.getNome());
-	    	userLogin.setText(userSelecionado.getLogin());
-	    	userSenha.setText(userSelecionado.getSenha());
+	    	mediaNome.setText(mediaSelecionada.getNome());
+	    	mediaDescricao.setText(mediaSelecionada.getDescricao());
+	    	mediaAno.setText(""+mediaSelecionada.getAno());
+	    	mediaTemporada.setText(""+mediaSelecionada.getTemporada());
+	    	mediaEpisodio.setText(""+mediaSelecionada.getEpisodio());
+	    	mediaDuracao.setText(""+mediaSelecionada.getDuracao());
+	    	mediaCategoria.setText(mediaSelecionada.getCategoria());
+	    	mediaDiretor.setText(mediaSelecionada.getDiretor());
+	    	mediaProtagonista.setText(mediaSelecionada.getProtagonista());
+	    	mediaClassificacao.setText(""+mediaSelecionada.getIdade());
+	    	
     	}
     }
     
@@ -177,6 +185,8 @@ public class AdminController extends Controller {
 		setDisableCampos(FIELDS_MEDIA, true);
 		mediaNovo.setText("Novo");
 		mediaNovo.setOnAction(e -> { this.acaoNovoMedia(); });
+		mediaSalvar.setDisable(true);
+		mediaRemover.setDisable(true);
 	}
 
 	@FXML

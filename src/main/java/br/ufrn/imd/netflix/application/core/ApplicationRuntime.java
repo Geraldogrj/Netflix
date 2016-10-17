@@ -19,6 +19,7 @@ public class ApplicationRuntime {
 	private static ApplicationRuntime singleton = new ApplicationRuntime();
 	
 	protected Stage mainViewStage;
+	
 	protected IReplaceableViewController mainViewController;
 			
 	private ApplicationRuntime() {}
@@ -27,12 +28,24 @@ public class ApplicationRuntime {
 		return singleton;
 	}
 	
-
+	public void setMainViewBundle(Bundle bundle) {
+		mainViewController.replaceBundle(bundle);
+	}
 		
 	public void loadView(String fxml) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
 		Parent root = loader.load();
 		mainViewController = loader.getController();
+		mainViewStage = new Stage();
+		mainViewStage.setScene(new Scene(root));
+	}
+	
+	public void loadView(String fxml, Bundle bundle) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+		Parent root = loader.load();
+		mainViewController = loader.getController();
+		Controller controller = (Controller) mainViewController;
+		controller.onCreate(bundle);
 		mainViewStage = new Stage();
 		mainViewStage.setScene(new Scene(root));
 	}

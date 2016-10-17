@@ -12,7 +12,13 @@ public abstract class ReplaceableViewController extends Controller implements IR
 		onReplace(parent);
 	}
 	
+	@Override
+	public void replaceBundle(Bundle bundle) {
+		onReplace(bundle);
+	}
+	
 	protected abstract void onReplace(Parent parent);
+	protected abstract void onReplace(Bundle bundle);
 	
 	
 }

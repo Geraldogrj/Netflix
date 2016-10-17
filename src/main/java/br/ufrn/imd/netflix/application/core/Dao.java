@@ -37,7 +37,6 @@ public class Dao<T extends Model> {
 		T obj = null;
 		try{
 			obj = getCurrentSession().find(entityClass, id);
-			tx.commit();
 		}
 		catch (NoResultException e){
 			return null;
@@ -46,6 +45,7 @@ public class Dao<T extends Model> {
 			tx.rollback();
 			throw e;
 		}
+		finally {tx.commit();}
 		
 		return obj;
 	}
@@ -64,7 +64,6 @@ public class Dao<T extends Model> {
 		
 		try{
 			obj = q.getSingleResult();
-			tx.commit();
 		}
 		catch (NoResultException e){
 			return null;
@@ -73,6 +72,7 @@ public class Dao<T extends Model> {
 			tx.rollback();
 			throw e;
 		}
+		finally {tx.commit();}
 		
 		return obj;
 	}
@@ -90,8 +90,7 @@ public class Dao<T extends Model> {
 		List<T> objs = null;
 		
 		try{
-			objs = q.getResultList();
-			tx.commit();
+			objs = q.getResultList();	
 		}
 		catch (NoResultException e){
 			return null;
@@ -100,28 +99,35 @@ public class Dao<T extends Model> {
 			tx.rollback();
 			throw e;
 		}		
+		finally {tx.commit();}
 		return objs;
 	}
 	
 	public void saveOrUpdate(T obj){
 		Transaction tx = getCurrentSession().beginTransaction();
-		try { getCurrentSession().saveOrUpdate(obj); tx.commit();}
+		try { getCurrentSession().saveOrUpdate(obj);}
 		catch (Exception e) { tx.rollback(); throw e;}
-		
+		finally {tx.commit();}
 	}
 	
 	public void delete(T obj){
 		Transaction tx = getCurrentSession().beginTransaction();
-		try { getCurrentSession().delete(obj); tx.commit();}
+		try { getCurrentSession().delete(obj);}
 		catch (Exception e) { tx.rollback(); throw e;}
+		finally {tx.commit();}
 	}
 	
 	public List<T> findAll() throws NoResultException {
 		Transaction tx = getCurrentSession().beginTransaction();
 		List<T> objs = null;
-		try {objs = getCurrentSession().createQuery(String.format("select t from %s t", entityClass.getSimpleName()), entityClass).getResultList();}
+		try {
+			objs = getCurrentSession().createQuery(String.format("select t from %s t", entityClass.getSimpleName()), entityClass).getResultList();
+		}
 		catch (NoResultException e){return null;}
 		catch (Exception e) { tx.rollback(); throw e;}
+		finally {
+			tx.commit();
+		}
 		return objs;
 	}
 	

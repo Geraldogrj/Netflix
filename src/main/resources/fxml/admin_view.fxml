@@ -1,139 +1,131 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Light.Distant?>
-<?import javafx.scene.effect.Lighting?>
-<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<TabPane prefHeight="369.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.netflix.application.controller.AdminController">
-  <tabs>
-    <Tab text="Usuário">
-      <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+<TabPane tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.netflix.application.controller.AdminController">
+   <tabs>
+      <Tab text="Gerenciar Usuário">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="800.0">
                <children>
-                  <GridPane layoutX="26.0" layoutY="14.0" vgap="10.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="15.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <TextField fx:id="nomeUser" promptText="Nome" />
-                        <TextField fx:id="login" promptText="Login" GridPane.rowIndex="1" />
-                        <TextField fx:id="senha" promptText="Senha" GridPane.rowIndex="2" />
-                     </children>
-                  </GridPane>
-                  <ButtonBar layoutX="378.0" layoutY="273.0" prefHeight="40.0" prefWidth="376.0" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0">
-                    <buttons>
-                      <Button mnemonicParsing="false" onAction="#cadastrar" text="Salvar" />
-                        <Button mnemonicParsing="false" text="Remover" />
-                        <Button mnemonicParsing="false" text="Pesquisar por ID" />
-                    </buttons>
-                  </ButtonBar>
-                  <Label layoutX="30.0" layoutY="334.0" text="Usuário Logado:" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
-                  <Label fx:id="lblUsuarioLogado" layoutX="104.0" layoutY="349.0" text="Label" textFill="#0d0de4" AnchorPane.bottomAnchor="10.0">
-                     <font>
-                        <Font name="System Bold Italic" size="12.0" />
-                     </font>
-                  </Label>
+                  <SplitPane dividerPositions="0.3" layoutX="7.0" layoutY="6.0" prefHeight="600.0" prefWidth="762.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <items>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #EDECED;">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Label text="Dados do usuario">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="userNome" disable="true" promptText="Nome" />
+                                    <TextField fx:id="userLogin" disable="true" promptText="Login" />
+                                    <PasswordField fx:id="userSenha" disable="true" promptText="Senha" />
+                                    <Button fx:id="userNovo" mnemonicParsing="false" onAction="#acaoNovoUsuario" prefHeight="26.0" prefWidth="220.0" text="Novo" />
+                                    <HBox>
+                                       <children>
+                                          <Button fx:id="userSalvar" disable="true" mnemonicParsing="false" onAction="#acaoSalvarUsuario" prefHeight="26.0" prefWidth="220.0" text="Salvar" HBox.hgrow="ALWAYS" />
+                                          <Button fx:id="userRemover" disable="true" mnemonicParsing="false" onAction="#acaoRemoverUsuario" prefHeight="26.0" prefWidth="220.0" text="Remover" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <TableView fx:id="userTableView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <columns>
+                                    <TableColumn fx:id="userIdColumn" minWidth="50.0" prefWidth="75.0" text="ID" />
+                                    <TableColumn fx:id="userNomeColumn" minWidth="80.0" prefWidth="75.0" text="NOME" />
+                                    <TableColumn fx:id="userLoginColumn" minWidth="100.0" prefWidth="-1.0" text="LOGIN" />
+                                    <TableColumn fx:id="userSenhaColumn" minWidth="100.0" prefWidth="-1.0" text="SENHA" />
+                                 </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                     </items>
+                  </SplitPane>
                </children>
             </AnchorPane>
-      </content>
-    </Tab>
-    <Tab text="Mídia">
-      <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+         </content>
+      </Tab>
+      <Tab text="Gerenciar Mídia">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <GridPane layoutY="14.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="15.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <TextField fx:id="id" maxWidth="-Infinity" promptText="ID" />
-                        <TextField fx:id="nome" promptText="Nome" GridPane.rowIndex="1" />
-                        <TextField fx:id="descricao" promptText="Descrição" GridPane.rowIndex="2" />
-                        <TextField fx:id="ano" maxWidth="-Infinity" prefWidth="80.0" promptText="Ano" GridPane.rowIndex="3" />
-                        <TextField fx:id="temporada" maxWidth="-Infinity" prefWidth="80.0" promptText="Temporada" GridPane.rowIndex="3">
-                           <GridPane.margin>
-                              <Insets left="90.0" />
-                           </GridPane.margin>
-                        </TextField>
-                        <TextField fx:id="episodio" maxWidth="-Infinity" prefWidth="80.0" promptText="Episódio" GridPane.rowIndex="3">
-                           <GridPane.margin>
-                              <Insets left="180.0" />
-                           </GridPane.margin>
-                        </TextField>
-                        <TextField fx:id="duracao" maxWidth="-Infinity" prefWidth="80.0" promptText="Duração" GridPane.rowIndex="3">
-                           <GridPane.margin>
-                              <Insets left="270.0" />
-                           </GridPane.margin>
-                        </TextField>
-                        <TextField fx:id="categoria" maxWidth="-Infinity" prefWidth="140.0" promptText="Categoria" GridPane.rowIndex="3">
-                           <GridPane.margin>
-                              <Insets left="360.0" />
-                           </GridPane.margin>
-                        </TextField>
-                        <TextField fx:id="diretor" promptText="Diretor" GridPane.rowIndex="4" />
-                        <TextField fx:id="protagonista" promptText="Protagonista" GridPane.rowIndex="5" />
-                        <TextField fx:id="idade" promptText="Faixa Etária" GridPane.rowIndex="6" />
-                        <ImageView fx:id="icoSearch" fitHeight="23.0" fitWidth="33.0" onMouseClicked="#pesquisarPorID" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../search-icon24.png" />
-                           </image>
-                           <effect>
-                              <Lighting>
-                                 <bumpInput>
-                                    <Shadow />
-                                 </bumpInput>
-                                 <light>
-                                    <Light.Distant />
-                                 </light>
-                              </Lighting>
-                           </effect>
-                           <GridPane.margin>
-                              <Insets left="160.0" />
-                           </GridPane.margin>
-                        </ImageView>
-                     </children>
-                  </GridPane>
-                  <ImageView fitHeight="118.0" fitWidth="199.0" layoutX="44.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="44.0" />
-                  <ButtonBar prefHeight="40.0" prefWidth="376.0" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0">
-                     <buttons>
-                        <Button mnemonicParsing="false" onAction="#salvarMidia" text="Salvar" />
-                        <Button mnemonicParsing="false" onAction="#removerMidia" text="Remover" />
-                        <Button mnemonicParsing="false" onAction="#pesquisarPorID" text="Pesquisar por ID" />
-                     </buttons>
-                  </ButtonBar>
+                  <SplitPane dividerPositions="0.5" layoutX="115.0" layoutY="86.0" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <items>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="444.0" prefWidth="271.0" style="-fx-background-color: #778899;">
+                           <children>
+                              <JFXTextField fx:id="nome" labelFloat="true" layoutX="11.0" layoutY="14.0" maxWidth="354.0" minWidth="354.0" prefHeight="31.0" prefWidth="354.0" promptText="Nome" unFocusColor="WHITE" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="9.0" />
+                              <JFXTextField fx:id="descricao" labelFloat="true" layoutX="11.0" layoutY="63.0" promptText="Descrição" unFocusColor="WHITE" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="9.0" />
+                              <JFXTextField fx:id="ano" labelFloat="true" layoutX="15.0" layoutY="111.0" maxWidth="-Infinity" minWidth="80.0" prefHeight="31.0" prefWidth="93.0" promptText="Ano" unFocusColor="WHITE" AnchorPane.leftAnchor="15.0" />
+                              <JFXTextField fx:id="temporada" labelFloat="true" layoutX="105.0" layoutY="111.0" maxWidth="-Infinity" minWidth="80.0" prefHeight="31.0" prefWidth="93.0" promptText="Temporada" unFocusColor="WHITE" AnchorPane.leftAnchor="105.0" />
+                              <JFXTextField fx:id="episodio" labelFloat="true" layoutX="195.0" layoutY="111.0" maxWidth="-Infinity" minWidth="80.0" prefHeight="31.0" prefWidth="93.0" promptText="Episódio" unFocusColor="WHITE" AnchorPane.leftAnchor="195.0" />
+                              <JFXTextField fx:id="duracao" labelFloat="true" layoutX="298.0" layoutY="111.0" maxWidth="-Infinity" minWidth="80.0" prefHeight="31.0" prefWidth="93.0" promptText="Duração" unFocusColor="WHITE" AnchorPane.rightAnchor="5.0" />
+                              <JFXTextField fx:id="diretor" labelFloat="true" layoutX="11.0" layoutY="156.0" maxWidth="120.0" minWidth="120.0" prefHeight="31.0" prefWidth="120.0" promptText="Diretor" unFocusColor="WHITE" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="9.0" />
+                              <JFXTextField fx:id="protagonista" labelFloat="true" layoutX="11.0" layoutY="200.0" maxWidth="120.0" minWidth="120.0" prefHeight="31.0" prefWidth="120.0" promptText="Protagonista" unFocusColor="WHITE" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="9.0" />
+                              <JFXTextField fx:id="categoria" labelFloat="true" layoutX="11.0" layoutY="244.0" maxWidth="120.0" minWidth="120.0" prefHeight="31.0" prefWidth="120.0" promptText="Categoria" unFocusColor="WHITE" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="9.0" />
+                              <JFXTextField fx:id="idade" labelFloat="true" layoutX="11.0" layoutY="291.0" promptText="Classificação Etária" unFocusColor="WHITE" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="9.0" />
+                              <ImageView fitHeight="165.0" fitWidth="162.0" layoutX="15.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="15.0">
+                                 <image>
+                                    <Image url="@../../../../../insert_image.png" />
+                                 </image>
+                              </ImageView>
+                              <JFXButton layoutX="33.0" layoutY="405.0" ripplerFill="#fcf9f9" style="-fx-background-color: #4B0082;" text="Selecionar Imagem" textFill="#fffdfd" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="35.0" />
+                              <JFXButton layoutX="201.0" layoutY="424.0" onAction="#acaoSalvarMidia" prefHeight="25.0" prefWidth="175.0" ripplerFill="#fcf9f9" style="-fx-background-color: #4B0082;" text="Salvar" textFill="#fffdfd" />
+                              <JFXButton layoutX="184.0" layoutY="479.0" onAction="#acaoRemoverMidia" prefHeight="25.0" prefWidth="176.0" ripplerFill="#fcf9f9" style="-fx-background-color: #4B0082;" text="Remover" textFill="#fffdfd" AnchorPane.rightAnchor="19.0" />
+                              <JFXTextField fx:id="id" labelFloat="true" layoutX="296.0" layoutY="368.0" maxWidth="91.0" minWidth="86.0" prefHeight="31.0" prefWidth="80.0" promptText="ID" AnchorPane.rightAnchor="14.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="444.0" prefWidth="478.0" style="-fx-background-color: #778899;">
+                           <children>
+                              <JFXTreeTableView layoutX="67.0" layoutY="30.0" prefHeight="444.0" prefWidth="381.0" style="-fx-background-color: #778899;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <columns>
+                                    <TreeTableColumn prefWidth="75.0" text="ID" />
+                                    <TreeTableColumn prefWidth="75.0" text="Nome" />
+                                    <TreeTableColumn prefWidth="75.0" text="Episódio" />
+                                    <TreeTableColumn prefWidth="75.0" text="Temporada" />
+                                 </columns>
+                                 <columnResizePolicy>
+                                    <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </JFXTreeTableView>
+                           </children>
+                        </AnchorPane>
+                     </items>
+                  </SplitPane>
                </children>
             </AnchorPane>
-      </content>
-    </Tab>
-  </tabs>
+         </content>
+      </Tab>
+   </tabs>
 </TabPane>

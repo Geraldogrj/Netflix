@@ -2,16 +2,20 @@ package br.ufrn.imd.netflix.application.controller;
 
 import static java.lang.Integer.parseInt;
 
+import java.util.List;
+
 import br.ufrn.imd.netflix.application.core.Bundle;
 import br.ufrn.imd.netflix.application.core.Controller;
 import br.ufrn.imd.netflix.application.core.Dao;
 import br.ufrn.imd.netflix.application.model.Media;
 import br.ufrn.imd.netflix.application.model.Usuario;
-import java.util.List;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 
 /**
@@ -20,18 +24,36 @@ import javafx.scene.image.ImageView;
  */
 public class AdminController extends Controller {
 
-    public static final String FXML_ADMIN = "/fxml/admin2_view.fxml";
+    public static final String FXML_ADMIN = "/fxml/admin_view.fxml";
     
+    /** Dados de gerenciar usuario  */
+    private Usuario userSelecionado;
+    
+    /** Dados de gerenciar usuario */
     @FXML
-    private Label lblUsuarioLogado;
+    private TextField userNome;
     @FXML
-    private TextField idUser;
+    private TextField userLogin;
     @FXML
-    private TextField nomeUser;
+    private TextField userSenha;
     @FXML
-    private TextField login;
+    private Button userNovo;
     @FXML
-    private TextField senha;
+    private Button userSalvar;
+    @FXML 
+    private Button userRemover;
+    @FXML
+    private TableView<Usuario> userTableView;
+    @FXML
+    private TableColumn<Usuario, Object> userIdColumn;
+    @FXML
+    private TableColumn<Usuario, Object> userNomeColumn;
+    @FXML
+    private TableColumn<Usuario, Object> userLoginColumn;
+    @FXML
+    private TableColumn<Usuario, Object> userSenhaColumn;
+           
+    /** Dados da tabela gerenciar mídia */
     @FXML
     private TextField id;
     @FXML
@@ -56,34 +78,106 @@ public class AdminController extends Controller {
     private TextField idade;
     @FXML
     private ImageView icoSearch;
-//    @FXML
-//    private TableView<Usuario> tbUser;
 
      
     @Override
-    public void onCreate(Bundle bundle) {
-        Usuario usuario = (Usuario) bundle.get("usuario");
-        lblUsuarioLogado.setText(usuario.getNome());
+    public void onCreate(Bundle bundle) {                
+        userTableView.getSelectionModel().selectedItemProperty().addListener(
+        		(observable, oldValue, selecionado) -> { acaoSelecionarUsuario(selecionado); });
+
+        userIdColumn.setCellValueFactory(new PropertyValueFactory<Usuario,Object>("id"));
+        userNomeColumn.setCellValueFactory(new PropertyValueFactory<Usuario,Object>("nome"));
+        userLoginColumn.setCellValueFactory(new PropertyValueFactory<Usuario,Object>("login"));
+        userSenhaColumn.setCellValueFactory(new PropertyValueFactory<Usuario,Object>("senha"));
+        
+        atualizarListagemUsuarios();
+        
+    }
+    
+    private void atualizarListagemUsuarios(){
+    	Dao<Usuario> dao = getDAO(Usuario.class);  
+        List<Usuario> usuarios = dao.findAll();
+        userTableView.setItems(FXCollections.observableArrayList(usuarios));
+        userTableView.refresh();
+    }
+    
+    public void acaoSelecionarUsuario(Usuario usuario){
+    	if(usuario != null){
+	    	userSelecionado = usuario;
+	    	userNome.setDisable(false);
+	    	userLogin.setDisable(false);
+	    	userSenha.setDisable(false);
+	    	userNovo.setText("Cancelar");  
+	    	userNovo.setOnAction(e -> { this.acaoCancelarUsuario(); });
+	    	userSalvar.setDisable(false);
+	    	userRemover.setDisable(false);
+	    	
+	    	userNome.setText(userSelecionado.getNome());
+	    	userLogin.setText(userSelecionado.getLogin());
+	    	userSenha.setText(userSelecionado.getSenha());
+    	}
+    }
+    
+    public void acaoNovoUsuario(){
+    	userSelecionado = new Usuario();
+    	userNome.setDisable(false);
+    	userLogin.setDisable(false);
+    	userSenha.setDisable(false);
+    	userNovo.setText("Cancelar");  
+    	userNovo.setOnAction(e -> { this.acaoCancelarUsuario(); });
+    	userSalvar.setDisable(false);
+    	userRemover.setDisable(false);
+    }
+    
+    public void acaoCancelarUsuario(){
+    	apagarCamposUsuario();
+    	userSelecionado = null;
+    	userNome.setDisable(true);
+    	userLogin.setDisable(true);
+    	userSenha.setDisable(true);
+    	userNovo.setText("Novo");  
+    	userNovo.setOnAction(e -> { this.acaoNovoUsuario(); });
+    	userSalvar.setDisable(true);
+    	userRemover.setDisable(true);
+    	
     }
 
-    public void cadastrar() {
+    @FXML
+    public void acaoSalvarUsuario() {
         try {
             Dao<Usuario> dao = getDAO(Usuario.class);
+            
+            userSelecionado.setNome(userNome.getText());
+            userSelecionado.setLogin(userLogin.getText());
+            userSelecionado.setSenha(userSenha.getText());
 
-            Usuario usuario = new Usuario();
-            usuario.setNome(nomeUser.getText());
-            usuario.setLogin(login.getText());
-            usuario.setSenha(senha.getText());
-
-            dao.saveOrUpdate(usuario);
+            dao.saveOrUpdate(userSelecionado);
+            userSelecionado = null;
+            acaoCancelarUsuario();
+            atualizarListagemUsuarios();
             abrirAlertaInfo("Sucesso", "Usuário cadastrado/atualizado com sucesso");
         } catch (Exception e) {
             e.printStackTrace();
             abrirAlertaErro("Erro", "Não foi possível efetuar o cadastro");
         }
     }
+    
+    public void acaoRemoverUsuario(){
+    	if(userSelecionado != null && userSelecionado.getId() > 0){
+	    	try {
+	    		Dao<Usuario> dao = getDAO(Usuario.class);
+	    		dao.delete(userSelecionado);
+	    		acaoCancelarUsuario();
+	    		atualizarListagemUsuarios();
+	    		
+	    	} catch (Exception e) {
+	            e.printStackTrace();
+	            abrirAlertaErro("Erro", "Não foi possível remover o cadastro");
+	        }
+    	}
+    }
 
-    public void salvarMidia() {
+    public void acaoSalvarMidia() {
         try {
             Dao<Media> dao = getDAO(Media.class);
 
@@ -111,7 +205,7 @@ public class AdminController extends Controller {
         }
     }
 
-    public void pesquisarPorID() {
+/*    public void pesquisarPorID() {
         try {
             Dao<Media> dao = getDAO(Media.class);
             
@@ -138,9 +232,9 @@ public class AdminController extends Controller {
             e.printStackTrace();
             abrirAlertaErro("Erro", e.getCause() + e.getMessage());
         }
-    }
+    }*/
 
-    public void removerMidia() {
+    public void acaoRemoverMidia() {
         try {
             Dao<Media> dao = getDAO(Media.class);
             Media media = dao.findById(parseInt(id.getText()));
@@ -167,6 +261,12 @@ public class AdminController extends Controller {
         protagonista.setText("");
         idade.setText("");
         categoria.setText("");
+    }
+    
+    public void apagarCamposUsuario(){
+    	userNome.setText("");
+    	userLogin.setText("");
+    	userSenha.setText("");
     }
     
     public void setarImagem(){

@@ -1,5 +1,6 @@
 package br.ufrn.imd.netflix.application.controller;
 
+import br.ufrn.imd.netflix.application.core.Bundle;
 import br.ufrn.imd.netflix.application.core.Controller;
 import br.ufrn.imd.netflix.application.core.Dao;
 import br.ufrn.imd.netflix.application.core.Intent;
@@ -9,7 +10,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 
 /**
  * FXML Controller class
@@ -53,8 +53,10 @@ public class LoginController extends Controller {
     				intent.fxml(MediaController.FXML_MEDIA);
     			}
     			
- 		       	intent.putExtra("usuario", result);
+    			Bundle bundle = new Bundle();
+    			bundle.putExtra("usuario", usuario);
 				getRuntime().replaceMainViewAndShow(intent);
+				getRuntime().setMainViewBundle(bundle);
  	    		getRuntime().closeWindow(event);
 			}
 			else {

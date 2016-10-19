@@ -38,14 +38,14 @@ public class Media extends Model {
     private String protagonista;
     @Column
     private Integer idade;
-    @Transient
-    private ImageView imagem;
+    @Column
+    private String imagem;
     
     public Media(){
         
     }
 
-    public Media(Integer id, String nome, String descricao, Integer ano, Integer temporada, Integer episodio, Integer duracao, String categoria, String diretor, String protagonista, Integer idade, ImageView imagem) {
+    public Media(Integer id, String nome, String descricao, Integer ano, Integer temporada, Integer episodio, Integer duracao, String categoria, String diretor, String protagonista, Integer idade, String imagem) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
@@ -140,11 +140,11 @@ public class Media extends Model {
         this.idade = idade;
     }
 
-    public ImageView getImagem() {
+    public String getImagem() {
         return imagem;
     }
 
-    public void setImagem(ImageView imagem) {
+    public void setImagem(String imagem) {
         this.imagem = imagem;
     }
     

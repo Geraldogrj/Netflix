@@ -22,7 +22,7 @@ public class NetflixApplication extends Application {
              */
             Hibernate.getSessionFactory();
 
-            cadastrarAdmin();
+        //    cadastrarAdmin();
 
             /**
              * Carrega Login

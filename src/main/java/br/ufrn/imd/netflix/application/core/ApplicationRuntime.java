@@ -97,7 +97,7 @@ public class ApplicationRuntime {
 			replaceMainView(intent);
 		} 
 		catch (IOException e) {
-			abrirAlertaErro("Erro Inesperado!", "Nï¿½o foi possï¿½vel abrir a janela de Mï¿½dia... \n" + e.getMessage());
+			abrirAlertaErro("Erro Inesperado!", "Não foi possível abrir a janela de Mídia... \n" + e.getMessage());
 			e.printStackTrace();
 		}
 		showMainView();
@@ -134,7 +134,7 @@ public class ApplicationRuntime {
 	}
 	
 	/**
-	 * Fecha a janela que chamou a aÃ§Ã£o.
+	 * Fecha a janela que chamou a ação.
 	 * @param event
 	 */
 	public void closeWindow(ActionEvent event){

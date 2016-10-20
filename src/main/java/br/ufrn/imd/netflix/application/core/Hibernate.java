@@ -18,7 +18,7 @@ public class Hibernate {
 
 	private static SessionFactory buildSessionFactory() {
 		try {
-			SessionFactory sessionFactory = new Configuration().configure(HQSQLDB)
+			SessionFactory sessionFactory = new Configuration().configure(MYSQL)
 					.buildSessionFactory();
 			return sessionFactory;
 

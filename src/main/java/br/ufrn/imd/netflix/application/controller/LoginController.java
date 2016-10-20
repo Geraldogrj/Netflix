@@ -64,11 +64,13 @@ public class LoginController extends Controller {
     			
     			/** Carrega a janela principal e seta o conte�do */
     			try {
+                                        
 					getRuntime().loadView(MainController.FXML_MAIN);
 					getRuntime().replaceMainView(intent);
 					getRuntime().setMainViewBundle(bundle);
 					getRuntime().showMainView();
-				} 
+                                        getRuntime().closeWindow(event);
+                        } 
     			catch (IOException e) {				
     				abrirAlertaErro("Erro", "Erro ao carregar janela principal...");
 				}

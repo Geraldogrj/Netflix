@@ -18,6 +18,7 @@ import org.hibernate.query.Query;
 public class Dao<T extends Model> {
 	
 	private final Class<T> entityClass;
+	private int pageSize;
 	
 	public Dao(Class<T> clazz) {
 		entityClass = clazz;
@@ -130,6 +131,61 @@ public class Dao<T extends Model> {
 		}
 		return objs;
 	}
+	
+	public List<T> findAll(int page){
+		Transaction tx = getCurrentSession().beginTransaction();
+		int maxRecords = getPageSize();
+		int startRow = page * maxRecords;	
+		
+		Query<T> query = getCurrentSession().createQuery("select t from " + entityClass.getSimpleName() + " t ", entityClass);
+		query.setMaxResults(maxRecords);
+		query.setFirstResult(startRow);
+		
+		List<T> objs = null;
+		try {
+			objs = query.getResultList();
+		}
+		catch (NoResultException e){return null;}
+		catch (Exception e) { tx.rollback(); throw e;}
+		finally {
+			tx.commit();
+		}
+		
+		return query.getResultList();
+	}
+	
+	public Long countAll(){
+		Transaction tx = getCurrentSession().beginTransaction();
+		Long countResult = new Long(0);
+		try {
+			countResult = (Long) getCurrentSession().createQuery(String.format("select count(t.id) from %s t ", entityClass.getSimpleName())).getSingleResult();
+		}
+		catch (Exception e){
+			tx.rollback(); 
+			return countResult;
+			}
+		finally {
+			tx.commit();
+		}
+				
+		return countResult;
+	}
+	
+	public int numPages(){
+		Long numPages = countAll() / getPageSize();
+		return numPages.intValue();
+	}
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+	
+	
+	
 	
 	
 

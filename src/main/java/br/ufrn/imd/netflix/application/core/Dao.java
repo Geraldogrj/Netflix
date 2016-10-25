@@ -151,7 +151,7 @@ public class Dao<T extends Model> {
 			tx.commit();
 		}
 		
-		return query.getResultList();
+		return objs;
 	}
 	
 	public Long countAll(){

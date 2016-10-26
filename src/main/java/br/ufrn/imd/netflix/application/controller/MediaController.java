@@ -9,11 +9,23 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 /**
  *
@@ -27,16 +39,12 @@ public class MediaController extends Controller {
     public static final int ALTURA_IMG = 100;
 
     @FXML
-    private ImageView img01;
-    @FXML
     private GridPane gridMedia;
 
     public int paginaAtual;
 
     @Override
     public void onCreate(Bundle bundle) {
-        //    Usuario usuario = (Usuario) bundle.get("usuario");
-//       lblUsuarioLogado.setText(usuario.getNome());
         paginaAtual = 0;
         carregarMedia();
     }
@@ -50,21 +58,26 @@ public class MediaController extends Controller {
         List<Media> medias = dao.findAll(paginaAtual);
         Iterator<Media> it = medias.iterator();
         //Iteração sobre as mídias para obter a ImageView
-        while(it.hasNext()){
+        while (it.hasNext()) {
             Media media = it.next();
             File file = new File(media.getImagem());
             FileInputStream inputStream;
             try {
-                        inputStream = new FileInputStream(file);
-                        Image image = new Image(inputStream);
-                        ImageView imageView = new ImageView(image);
-                        pictures.add(imageView);
-            } catch (Exception e){
-                
+                inputStream = new FileInputStream(file);
+                Image image = new Image(inputStream);
+                ImageView imageView = new ImageView(image);
+
+                imageView.setOnMouseClicked(e -> {
+                    abrirMedia(media);
+                });
+
+                pictures.add(imageView);
+            } catch (Exception e) {
+
             }
         }
-       //Configurando o GridPane
-        gridMedia.setPadding(new Insets(50,50,50,50));
+        //Configurando o GridPane
+        gridMedia.setPadding(new Insets(50, 50, 50, 50));
         gridMedia.setHgap(20);
         gridMedia.setVgap(100);
         //Os itens serão inseridos a partir do ponto (0,0) incrementando
@@ -72,17 +85,48 @@ public class MediaController extends Controller {
         int imageCol = 0;
         int imageRow = 0;
         //Iterando sobre as figuras para adicionar no GridPane
-        for (ImageView picture : pictures) {   
+        for (ImageView picture : pictures) {
             picture.setFitWidth(LARGURA_IMG);
             picture.setFitHeight(ALTURA_IMG);
             gridMedia.add(picture, imageCol, imageRow);
-            
+
             imageCol++;
             //Teste para saber se já chegou ao fim de 4 colunas.
-            if (imageCol > 3){
+            if (imageCol > 3) {
                 imageCol = 0;
                 imageRow++;
             }
         }
+    }
+
+    private void abrirMedia(Media media) {
+        File file = new File(media.getVideo());
+        javafx.scene.media.Media mediaFx = new javafx.scene.media.Media(file.toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(mediaFx);
+        MediaView mediaView = new MediaView(mediaPlayer);
+        
+
+        final DoubleProperty width = mediaView.fitWidthProperty();
+        final DoubleProperty height = mediaView.fitHeightProperty();
+
+        width.bind(Bindings.selectDouble(mediaView.sceneProperty(), "width"));
+        height.bind(Bindings.selectDouble(mediaView.sceneProperty(), "height"));
+
+        mediaView.setPreserveRatio(true);
+
+        StackPane root = new StackPane();
+        root.getChildren().add(mediaView);
+
+        final Scene scene = new Scene(root, 960, 540);
+        scene.setFill(Color.BLACK);
+
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle(media.getNome());
+        stage.setFullScreen(true);
+        stage.show();
+        
+        mediaPlayer.play();
+
     }
 }

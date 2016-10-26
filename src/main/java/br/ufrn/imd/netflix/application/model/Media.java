@@ -40,12 +40,16 @@ public class Media extends Model {
     private Integer idade;
     @Column
     private String imagem;
+    @Column
+    private String video;
     
     public Media(){
         
     }
 
-    public Media(Integer id, String nome, String descricao, Integer ano, Integer temporada, Integer episodio, Integer duracao, String categoria, String diretor, String protagonista, Integer idade, String imagem) {
+    public Media(Integer id, String nome, String descricao, Integer ano, 
+            Integer temporada, Integer episodio, Integer duracao, String categoria, 
+            String diretor, String protagonista, Integer idade, String imagem, String video) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
@@ -58,6 +62,7 @@ public class Media extends Model {
         this.protagonista = protagonista;
         this.idade = idade;
         this.imagem = imagem;
+        this.video = video;
     }
 
     public String getNome() {
@@ -147,7 +152,13 @@ public class Media extends Model {
     public void setImagem(String imagem) {
         this.imagem = imagem;
     }
-    
-    
+
+    public String getVideo() {
+        return video;
+    }
+
+    public void setVideo(String video) {
+        this.video = video;
+    }
     
 }

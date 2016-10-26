@@ -99,11 +99,20 @@
                                     <TextField fx:id="mediaProtagonista" disable="true" promptText="Protagonista" />
                                     <TextField fx:id="mediaCategoria" disable="true" promptText="Categoria" />
                                     <TextField fx:id="mediaClassificacao" disable="true" promptText="Classificação Etária" />
-                                    <ImageView fx:id="imgPicture" fitHeight="86.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../images/insert_image.png" />
-                                       </image>
-                                    </ImageView>
+                                    <HBox prefHeight="83.0" prefWidth="366.0" spacing="100.0">
+                                       <children>
+                                          <ImageView fx:id="imgPicture" fitHeight="86.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../images/insert_image.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="imgVideo" fitHeight="68.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../images/insert_video.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </HBox>
                                     <Button fx:id="mediaNovo" mnemonicParsing="false" onAction="#acaoNovoMedia" prefHeight="26.0" prefWidth="143.0" text="Novo" />
                                     <Button fx:id="mediaSalvar" disable="true" mnemonicParsing="false" onAction="#acaoSalvarMedia" prefHeight="26.0" prefWidth="142.0" text="Salvar" />
                                     <Button fx:id="mediaRemover" disable="true" mnemonicParsing="false" onAction="#acaoRemoverMedia" prefHeight="26.0" prefWidth="142.0" text="Remover" />

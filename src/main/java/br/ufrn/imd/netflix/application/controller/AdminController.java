@@ -114,6 +114,8 @@ public class AdminController extends Controller {
     private TableColumn<Media, Object> mediaAnoColumn;
     @FXML
     private ImageView imgPicture;
+    @FXML
+    private ImageView imgVideo;
     
     
     private TextField[] FIELDS_USUARIO;
@@ -170,6 +172,14 @@ public class AdminController extends Controller {
                 
             }
             });
+        
+        imgVideo.setOnMouseClicked(event -> {
+            FileChooser fileChooser = new FileChooser();
+            File file = fileChooser.showOpenDialog(((Node) event.getSource()).getScene().getWindow());
+            if(file != null){
+                mediaSelecionada.setVideo(file.getAbsolutePath());    
+            }
+        });
         
     }
 

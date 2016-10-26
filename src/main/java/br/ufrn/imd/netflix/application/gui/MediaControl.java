@@ -5,10 +5,24 @@
  */
 package br.ufrn.imd.netflix.application.gui;
 
-import java.time.Duration;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.media.MediaView;
+import javafx.util.Duration;
 
 /**
  *
@@ -34,5 +48,120 @@ public class MediaControl extends BorderPane {
         mvPane.getChildren().add(mediaView);
         mvPane.setStyle("-fx-background-color: black;"); 
         setCenter(mvPane);
+        mediaBar = new HBox();
+        mediaBar.setAlignment(Pos.CENTER);
+        mediaBar.setPadding(new Insets(5, 10, 5, 10));
+        BorderPane.setAlignment(mediaBar, Pos.CENTER);
+ 
+        final Button playButton  = new Button(">");
+        mediaBar.getChildren().add(playButton);
+        setBottom(mediaBar); 
+        
+     // Add spacer
+        Label spacer = new Label("   ");
+        mediaBar.getChildren().add(spacer);
+         
+        // Add Time label
+        Label timeLabel = new Label("Time: ");
+        mediaBar.getChildren().add(timeLabel);
+         
+        // Add time slider
+        timeSlider = new Slider();
+        HBox.setHgrow(timeSlider,Priority.ALWAYS);
+        timeSlider.setMinWidth(50);
+        timeSlider.setMaxWidth(Double.MAX_VALUE);
+        mediaBar.getChildren().add(timeSlider);
+
+        // Add Play label
+        playTime = new Label();
+        playTime.setPrefWidth(130);
+        playTime.setMinWidth(50);
+        mediaBar.getChildren().add(playTime);
+         
+        // Add the volume label
+        Label volumeLabel = new Label("Vol: ");
+        mediaBar.getChildren().add(volumeLabel);
+         
+        // Add Volume slider
+        volumeSlider = new Slider();        
+        volumeSlider.setPrefWidth(70);
+        volumeSlider.setMaxWidth(Region.USE_PREF_SIZE);
+        volumeSlider.setMinWidth(30);
+         
+        mediaBar.getChildren().add(volumeSlider);
+        
+        playButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                Status status = mp.getStatus();
+         
+                if (status == Status.UNKNOWN  || status == Status.HALTED)
+                {
+                   // don't do anything in these states
+                   return;
+                }
+         
+                  if ( status == Status.PAUSED
+                     || status == Status.READY
+                     || status == Status.STOPPED)
+                  {
+                     // rewind the movie if we're sitting at the end
+                     if (atEndOfMedia) {
+                        mp.seek(mp.getStartTime());
+                        atEndOfMedia = false;
+                     }
+                     mp.play();
+                     } else {
+                       mp.pause();
+                     }
+                 }
+           });
+        mp.currentTimeProperty().addListener(new InvalidationListener() 
+        {
+            public void invalidated(Observable ov) {
+                updateValues();
+            }
+        });
+ 
+        mp.setOnPlaying(new Runnable() {
+            public void run() {
+                if (stopRequested) {
+                    mp.pause();
+                    stopRequested = false;
+                } else {
+                    playButton.setText("||");
+                }
+            }
+        });
+ 
+        mp.setOnPaused(new Runnable() {
+            public void run() {
+                System.out.println("onPaused");
+                playButton.setText(">");
+            }
+        });
+ 
+        mp.setOnReady(new Runnable() {
+            public void run() {
+                duration = mp.getMedia().getDuration();
+                updateValues();
+            }
+        });
+ 
+        mp.setCycleCount(repeat ? MediaPlayer.INDEFINITE : 1);
+        mp.setOnEndOfMedia(new Runnable() {
+            public void run() {
+                if (!repeat) {
+                    playButton.setText(">");
+                    stopRequested = true;
+                    atEndOfMedia = true;
+                }
+            }
+       });
+
      }
+
+	protected void updateValues() {
+		// TODO Auto-generated method stub
+		
+	}
 }

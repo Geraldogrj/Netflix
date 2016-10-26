@@ -1,27 +1,25 @@
 package br.ufrn.imd.netflix.application.controller;
 
-import br.ufrn.imd.netflix.application.core.Bundle;
-import br.ufrn.imd.netflix.application.core.Controller;
-import br.ufrn.imd.netflix.application.core.Dao;
-import br.ufrn.imd.netflix.application.model.Media;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import br.ufrn.imd.netflix.application.core.Bundle;
+import br.ufrn.imd.netflix.application.core.Controller;
+import br.ufrn.imd.netflix.application.core.Dao;
+import br.ufrn.imd.netflix.application.gui.MediaControl;
+import br.ufrn.imd.netflix.application.model.Media;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
@@ -53,11 +51,11 @@ public class MediaController extends Controller {
 
         Dao<Media> dao = getDAO(Media.class);
         List<ImageView> pictures = new ArrayList<>();
-        //Seta a quantidade de itens por página
+        //Seta a quantidade de itens por pï¿½gina
         dao.setPageSize(QUANTIDADE_PAGINA);
         List<Media> medias = dao.findAll(paginaAtual);
         Iterator<Media> it = medias.iterator();
-        //Iteração sobre as mídias para obter a ImageView
+        //Iteraï¿½ï¿½o sobre as mï¿½dias para obter a ImageView
         while (it.hasNext()) {
             Media media = it.next();
             File file = new File(media.getImagem());
@@ -80,7 +78,7 @@ public class MediaController extends Controller {
         gridMedia.setPadding(new Insets(50, 50, 50, 50));
         gridMedia.setHgap(20);
         gridMedia.setVgap(100);
-        //Os itens serão inseridos a partir do ponto (0,0) incrementando
+        //Os itens serï¿½o inseridos a partir do ponto (0,0) incrementando
         //as linhas para depois incrementar as colunas
         int imageCol = 0;
         int imageRow = 0;
@@ -91,7 +89,7 @@ public class MediaController extends Controller {
             gridMedia.add(picture, imageCol, imageRow);
 
             imageCol++;
-            //Teste para saber se já chegou ao fim de 4 colunas.
+            //Teste para saber se jï¿½ chegou ao fim de 4 colunas.
             if (imageCol > 3) {
                 imageCol = 0;
                 imageRow++;
@@ -114,10 +112,15 @@ public class MediaController extends Controller {
 
         mediaView.setPreserveRatio(true);
 
-        StackPane root = new StackPane();
-        root.getChildren().add(mediaView);
+        //StackPane root = new StackPane();
+        //root.getChildren().add(mediaView);
+        
+        Group root = new Group();
+        MediaControl mediaControl = new MediaControl(mediaPlayer);
+        
 
         final Scene scene = new Scene(root, 960, 540);
+        scene.setRoot(mediaControl);
         scene.setFill(Color.BLACK);
 
         Stage stage = new Stage();

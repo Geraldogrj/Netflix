@@ -11,8 +11,6 @@ import br.ufrn.imd.netflix.application.core.Controller;
 import br.ufrn.imd.netflix.application.core.Dao;
 import br.ufrn.imd.netflix.application.gui.MediaControl;
 import br.ufrn.imd.netflix.application.model.Media;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.DoubleProperty;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
@@ -22,7 +20,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -104,13 +101,13 @@ public class MediaController extends Controller {
         MediaView mediaView = new MediaView(mediaPlayer);
         
 
-        final DoubleProperty width = mediaView.fitWidthProperty();
+        /*final DoubleProperty width = mediaView.fitWidthProperty();
         final DoubleProperty height = mediaView.fitHeightProperty();
 
         width.bind(Bindings.selectDouble(mediaView.sceneProperty(), "width"));
-        height.bind(Bindings.selectDouble(mediaView.sceneProperty(), "height"));
+        height.bind(Bindings.selectDouble(mediaView.sceneProperty(), "height"));*/
 
-        mediaView.setPreserveRatio(true);
+        // mediaView.setPreserveRatio(true);
 
         //StackPane root = new StackPane();
         //root.getChildren().add(mediaView);
@@ -119,9 +116,10 @@ public class MediaController extends Controller {
         MediaControl mediaControl = new MediaControl(mediaPlayer);
         
 
-        final Scene scene = new Scene(root, 960, 540);
+        final Scene scene = new Scene(root, 540, 241);
+        
         scene.setRoot(mediaControl);
-        scene.setFill(Color.BLACK);
+//        scene.setFill(Color.BLACK);
 
         Stage stage = new Stage();
         stage.setScene(scene);
